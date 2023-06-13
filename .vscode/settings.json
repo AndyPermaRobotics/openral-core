@@ -1,0 +1,8 @@
+{
+    "genieai.promptPrefix.addTests": "Implement tests for the following code. Use pytest. Every test should have the sections # Arrange, # Act and # Assert ",
+    "python.testing.pytestArgs": [
+        "python/tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+}

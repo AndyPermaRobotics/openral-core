@@ -1,4 +1,4 @@
-# openRAL Packages
+# openRAL Core Packages
 
 This repository contains packages in various programming languages to work with the openRAL.
 
