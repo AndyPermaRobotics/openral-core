@@ -21,5 +21,15 @@
             "command": "cd python && python3 setup.py sdist bdist_wheel && twine upload dist/*",
             "problemMatcher": [],
         },
+        {
+            "label": "Typescript: build watch",
+            "type": "shell",
+            "command": "cd ./typescript && npm run buildWatch",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": [],
+        }
     ]
 }
