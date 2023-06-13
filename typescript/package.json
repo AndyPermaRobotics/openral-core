@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "description": "Javascript and Typescript package that contains the core functionality to work with the openRAL.",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "lint": "tslint --project tsconfig.json",
-    "build": "tsc",
-    "buildWatch": "concurrently --kill-others \"tsc -w\" \"tsc-alias -w\"",
+    "build": "tsc --declaration && tsc-alias",
+    "buildWatch": "concurrently --kill-others \"tsc --declaration -w\" \"tsc-alias -w\"",
     "test": "mocha -r ts-node/register -r tsconfig-paths/register 'test/**/*.ts'"
   },
   "repository": {
@@ -34,6 +35,6 @@
     "tsc-alias": "^1.8.6",
     "tsconfig-paths": "^4.2.0",
     "tslint": "^5.20.1",
-    "typescript": "^3.9.5"
+    "typescript": "^5.1.3"
   }
 }
