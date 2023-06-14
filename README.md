@@ -8,3 +8,10 @@ The packages use as few dependencies as possible to avoid dependency issues and 
 
 Look at our other repositories for more specific packages and concrete implementations.
 
+## Packages
+
+* Javascript/Typescript: [@openral/core](https://www.npmjs.com/package/@openral/core)
+* Python: [openral-py](https://pypi.org/project/openral-py/)
+
+
+
