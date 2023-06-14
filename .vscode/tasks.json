@@ -30,6 +30,16 @@
                 "panel": "new"
             },
             "problemMatcher": [],
-        }
-    ]
+        },
+        {
+            "type": "shell",
+            "label": "Typescript: Build and upload package to npmjs.com",
+            "command": "cd typescript && npm run build && npm publish",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": [],
+        },
+    ],
 }
