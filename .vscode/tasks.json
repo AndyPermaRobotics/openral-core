@@ -31,6 +31,18 @@
             },
             "problemMatcher": [],
         },
+
+        {
+            "type": "shell",
+            "label": "Typescript: Version PATCH",
+            "detail": "Increments the patch version number, e.g. 1.0.0 -> 1.0.1",
+            "command": "cd typescript && npm version patch",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": [],
+        },
         {
             "type": "shell",
             "label": "Typescript: Build and upload package to npmjs.com",

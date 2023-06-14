@@ -1,6 +1,6 @@
 {
   "name": "@openral/core",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Javascript and Typescript package that contains the core functionality to work with the openRAL.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -11,7 +11,9 @@
     "test": "mocha -r ts-node/register -r tsconfig-paths/register 'test/**/*.ts'",
     "prepublish": "tsc --declaration && tsc-alias"
   },
-  "files": ["lib/**/*"],
+  "files": [
+    "lib/**/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AndyPermaRobotics/openral-core.git"
@@ -25,8 +27,7 @@
     "url": "https://github.com/AndyPermaRobotics/openral-core/issues"
   },
   "homepage": "https://github.com/AndyPermaRobotics/openral-core",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/chai": "^4.3.5",
     "@types/mocha": "^10.0.1",
