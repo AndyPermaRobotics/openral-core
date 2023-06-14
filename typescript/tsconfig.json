@@ -13,6 +13,7 @@
       "*": ["*"]
     }
   },
+  "declaration": true,
   "allowSyntheticDefaultImports": true,
   "allowJs": true,
   "compileOnSave": true,

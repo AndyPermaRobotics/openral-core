@@ -8,8 +8,10 @@
     "lint": "tslint --project tsconfig.json",
     "build": "tsc --declaration && tsc-alias",
     "buildWatch": "concurrently --kill-others \"tsc --declaration -w\" \"tsc-alias -w\"",
-    "test": "mocha -r ts-node/register -r tsconfig-paths/register 'test/**/*.ts'"
+    "test": "mocha -r ts-node/register -r tsconfig-paths/register 'test/**/*.ts'",
+    "prepublish": "tsc --declaration && tsc-alias"
   },
+  "files": ["lib/**/*"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AndyPermaRobotics/openral-core.git"

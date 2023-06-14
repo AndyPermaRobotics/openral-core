@@ -1,0 +1,3 @@
+# lib directory for compiled tsc output
+lib/ 
+node_modules/
