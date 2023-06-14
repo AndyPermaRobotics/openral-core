@@ -34,7 +34,7 @@
         {
             "type": "shell",
             "label": "Typescript: Build and upload package to npmjs.com",
-            "command": "cd typescript && npm run build && npm publish",
+            "command": "cd typescript && npm run build && npm publish --access public",
             "presentation": {
                 "reveal": "always",
                 "panel": "new"

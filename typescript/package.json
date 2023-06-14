@@ -1,6 +1,6 @@
 {
-  "name": "openral-js",
-  "version": "0.0.1",
+  "name": "@openral/core",
+  "version": "0.0.2",
   "description": "Javascript and Typescript package that contains the core functionality to work with the openRAL.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
