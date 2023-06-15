@@ -7,7 +7,7 @@ from openral_py.repository.ral_repository import RalRepository
 #todo generics
 S = TypeVar('S', bound=SpecificProperties)
 
-class MockRalRepository(RalRepository):
+class MockRalObjectRepository(RalRepository):
     """
     A mock implementation of [RalRepository] that stores [RalObject]s in memory.
     """
