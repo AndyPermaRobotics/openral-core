@@ -21,7 +21,7 @@ export class FirestoreRalObjectRepository implements RalObjectRepository {
      * @param ralObject - The RalObject to create.
      * @param overrideIfExists - If true, the RalObject will be overwritten if it already exists. If false, an error will be thrown if the RalObject already exists.
      */
-    public async createRalObject(ralObject: RalObject, overrideIfExists: boolean = true): Promise<void> {
+    public async create(ralObject: RalObject, overrideIfExists: boolean = true): Promise<void> {
 
         if (overrideIfExists === false) {
 
@@ -39,7 +39,7 @@ export class FirestoreRalObjectRepository implements RalObjectRepository {
 
     }
 
-    public async getRalObjectByUid(uid: string): Promise<RalObject> {
+    public async getByUid(uid: string): Promise<RalObject> {
         const query = this.firestoreCollection.where("identity.uid", "==", uid);
 
         const resultObjects = await this.executeMultiQuery(query);
@@ -55,13 +55,13 @@ export class FirestoreRalObjectRepository implements RalObjectRepository {
         }
     }
 
-    public async getRalObjectsWithContainerId(containerId: string): Promise<RalObject[]> {
+    public async getByContainerId(containerId: string): Promise<RalObject[]> {
         const query = this.firestoreCollection.where("currentGeolocation.container.UID", "==", containerId);
 
         return await this.executeMultiQuery(query);
     }
 
-    public async getRalObjectsByRalType(ralType: string): Promise<RalObject[]> {
+    public async getByRalType(ralType: string): Promise<RalObject[]> {
         const query = this.firestoreCollection.where("template.RALType", "==", ralType);
 
         return await this.executeMultiQuery(query);
