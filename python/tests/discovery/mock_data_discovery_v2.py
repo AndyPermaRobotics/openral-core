@@ -229,7 +229,7 @@ class MockDataDiscoveryV2:
             "template": {
                 "RALType": "",
                 "version": "1",
-                "objectStateTemplates": "",
+                "objectStateTemplatesym   ": "",
             },
             "specificProperties": [
             ],

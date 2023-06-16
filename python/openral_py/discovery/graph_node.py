@@ -151,3 +151,40 @@ class GraphNode:
     
     def __repr__(self) -> str:
         return str(self)
+    
+
+    def get_child_with_uid(self, uid: str, dimension: DiscoveryDimension | None = None) -> Optional['GraphNode']:
+        """
+        Returns the child with the given uid in the given dimension or None if there is no child with this uid.
+        If dimension is None, then all children of all dimensions will be searched.
+        """
+
+        if dimension is None:
+            for dimension in self._children_map:
+                for child in self._children_map[dimension]:
+                    if child.data.identity.uid == uid:
+                        return child
+        else:
+            for child in self.children(dimension):
+                if child.data.identity.uid == uid:
+                    return child
+                
+        return None
+    
+    def get_parent_with_uid(self, uid: str, dimension: DiscoveryDimension | None = None) -> Optional['GraphNode']:
+        """
+        Returns the parent with the given uid in the given dimension or None if there is no parent with this uid.
+        If dimension is None, then all parents of all dimensions will be searched.
+        """
+
+        if dimension is None:
+            for dimension in self._parents_map:
+                for parent in self._parents_map[dimension]:
+                    if parent.data.identity.uid == uid:
+                        return parent
+        else:
+            for parent in self.parents(dimension):
+                if parent.data.identity.uid == uid:
+                    return parent
+                
+        return None

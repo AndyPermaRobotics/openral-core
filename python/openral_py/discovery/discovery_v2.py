@@ -97,12 +97,6 @@ class DiscoveryV2:
 
         # for every new node we have to load the dependencies recursively
         for new_node in all_new_nodes:
-            
-            # todo test
-            if new_node.data.identity.uid != "A":
-                print(f"Skip {new_node.data.identity.uid}")
-                return
-
             await self._load_dependencies_for_node_recursively(new_node)
             
 
@@ -140,8 +134,10 @@ class DiscoveryV2:
                 # todo test
                 print(f"Add {graph_node.data.identity.uid} as child to {current_node.data.identity.uid}")
 
+                graph_node.add_parent_node(dimension, current_node)
                 current_node.add_child_node(dimension, graph_node)
             else:
+                graph_node.add_child_node(dimension, current_node)
                 current_node.add_parent_node(dimension, graph_node)
 
         return new_nodes
