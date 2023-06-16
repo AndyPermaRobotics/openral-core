@@ -4,6 +4,7 @@ from typing import Callable
 from openral_py.model.current_geo_location import CurrentGeoLocation
 from openral_py.model.definition import Definition
 from openral_py.model.identity import Identity
+from openral_py.model.owner_ref import OwnerRef
 from openral_py.model.specific_properties import SpecificProperties
 from openral_py.model.template import Template
 
@@ -72,10 +73,10 @@ class RalObject:
             template: Template, 
             specific_properties: SpecificProperties, 
             current_geo_location: CurrentGeoLocation = CurrentGeoLocation(), 
-            current_owners: list[str] = [], 
+            current_owners: list[OwnerRef] = [], 
             object_state: str = "undefined", 
             location_history_ref: list[str] = [], 
-            owner_history_ref: list[str] = [], 
+            owner_history_ref: list[OwnerRef] = [], 
             method_history_ref: list[str] = [], 
             linked_object_ref: list[str] = []
         ):
@@ -113,14 +114,14 @@ class RalObject:
     def to_map(self) -> dict:
         return {
             "identity": self.identity.to_map(),
-            "currentOwners": self.current_owners,
+            "currentOwners": [value.to_map() for value in self.current_owners], 
             "definition": self.definition.to_map(),
             "objectState": self.object_state,
             "template": self.template.to_map(),
             "specificProperties": self.specific_properties.to_maps(),
             "currentGeolocation": self.current_geo_location.to_map(),
             "locationHistoryRef": self.location_history_ref,
-            "ownerHistoryRef": self.owner_history_ref,
+            "ownerHistoryRef": [value.to_map() for value in self.owner_history_ref],
             "methodHistoryRef": self.method_ristory_ref,
             "linkedObjectRef": self.linked_object_ref
         }
@@ -130,14 +131,14 @@ class RalObject:
     
         identity = Identity.from_map(map.get("identity", {}))
 
-        current_owners = map.get("currentOwners", [])
+        current_owners = [OwnerRef.from_map(value) for value in map.get("currentOwners", [])]    
         definition = Definition.from_map(map.get("definition", {}))
         object_state = map.get("objectState", "undefined")
         template = Template.from_map(map.get("template", {}))
         specific_properties = SpecificProperties.from_maps(map.get("specificProperties", []))
         current_geo_location = CurrentGeoLocation.from_map(map.get("currentGeolocation", {}))
         location_history_ref = map.get("locationHistoryRef", [])
-        owner_history_ref = map.get("ownerHistoryRef", [])
+        owner_history_ref = [OwnerRef.from_map(value) for value in map.get("ownerHistoryRef", [])]
         method_history_ref = map.get("methodHistoryRef", [])
         linked_object_ref = map.get("linkedObjectRef", [])
 

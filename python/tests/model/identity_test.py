@@ -1,30 +1,21 @@
 from typing import Any, Dict
 
 import pytest
-
 from openral_py.model.identity import Identity
 
 
 class TestIdentity:
-    @staticmethod
-    def from_map(data):
-        return Identity(
-            uid=data.get("UID"),
-            name=data.get("name"),
-            site_tag=data.get("siteTag"),
-            alternateIDs=data.get("alternateIDs", []),
-            alternateNames=data.get("alternateNames", []),
-        )
-
     def test_from_map_with_empty_data(self):
         # arrange
-        data = {}
+        data = {
+            "UID": "123",
+        }
 
         # act
-        identity = self.from_map(data)
+        identity = Identity.from_map(data)
 
         # assert
-        assert identity.uid is None
+        assert identity.uid == "123"
         assert identity.name is None
         assert identity.site_tag is None
         assert identity.alternate_ids == []
@@ -41,7 +32,7 @@ class TestIdentity:
         }
 
         # act
-        identity = self.from_map(data)
+        identity = Identity.from_map(data)
 
         # assert
         assert identity.uid == 123

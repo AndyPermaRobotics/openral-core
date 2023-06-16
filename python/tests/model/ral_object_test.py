@@ -1,6 +1,6 @@
 
 
-from openral_py.ral_object import RalObject
+from openral_py.model.ral_object import RalObject
 
 
 class TestRalObject:
@@ -15,7 +15,12 @@ class TestRalObject:
                 "alternateIDs": [],
                 "alternateNames": []
             },
-            "currentOwners": [],
+            "currentOwners": [
+                {
+                    "UID": "123",
+                    "RALType": "type",
+                }
+            ],
             "definition": {
                 "definitionText": "An object or entity that is not or cannot be named specifically",
                 "definitionURL": "https://www.thefreedictionary.com/thing"
@@ -53,7 +58,12 @@ class TestRalObject:
                 # "plusCode": "unknown"
             },
             "locationHistoryRef": [],
-            "ownerHistoryRef": [],
+            "ownerHistoryRef": [
+                {
+                    "UID": "456",
+                    "RALType": "type",
+                }
+            ],
             "methodHistoryRef": [],
             "linkedObjectRef": []
         }
@@ -68,7 +78,8 @@ class TestRalObject:
         assert ral_object.identity.alternate_ids == []
         assert ral_object.identity.alternate_names == []
 
-        assert ral_object.current_owners == []
+        assert len(ral_object.current_owners) == 1, "current_owners has one element"
+        assert ral_object.current_owners[0].uid == "123", "current_owners[0].uid is 123"
 
         assert ral_object.definition.definition_text == "An object or entity that is not or cannot be named specifically"
         assert ral_object.definition.definition_url == "https://www.thefreedictionary.com/thing"
@@ -102,7 +113,10 @@ class TestRalObject:
         # assert ral_object.current_geolocation.postal_address.street_number == "unknown"
 
         assert ral_object.location_history_ref == []
-        assert ral_object.owner_history_ref == []
+        
+        assert len(ral_object.owner_history_ref) == 1, "owner_history_ref has one element"
+        assert ral_object.owner_history_ref[0].uid == "456", "owner_history_ref[0].uid is 456"
+
         assert ral_object.method_ristory_ref == []
         assert ral_object.linked_object_ref == []
     

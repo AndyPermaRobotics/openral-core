@@ -1,4 +1,7 @@
 
+from typing import List
+
+from openral_py.discovery.model.discovery_dimension import DiscoveryDimension
 from openral_py.discovery.tree_node import TreeNode
 from openral_py.model.specific_properties import SpecificProperties
 from openral_py.ral_object import RalObject
@@ -17,8 +20,14 @@ class Discovery:
             self, 
             ral_repository: RalRepository, 
             start_object: RalObject, 
-            root_node_ral_type: str
+            root_node_ral_type: str,
+            discovery_dimensions: List[DiscoveryDimension] = []
         ):
+
+        self.discovery_dimensions = discovery_dimensions
+        """The dimensions that are used for the discovery. e.g. container.UID, owners, linkedObjectRef"""
+
+
         self.ral_repository = ral_repository
         """The RAL repository to search for objects."""
 
@@ -33,18 +42,22 @@ class Discovery:
         returns the result of the discovery as the root node of the discovery tree.
         The root node will have the RALType [root_node_ral_type].
         """
+
+        #first of all we iterate upward until we reach the root node
         top_node_object = await self._get_root_node_object()
         root_node = TreeNode(data=top_node_object, children=[])
-        await self._load_children(root_node)
+
+        #then we load the children recursively starting with the root node
+        await self._load_children_recursively(root_node)
         return root_node
 
-    async def _load_children(self, node: TreeNode) -> None:
+    async def _load_children_recursively(self, node: TreeNode) -> None:
         uid = node.data.identity.uid
         children = await self.ral_repository.get_ral_objects_with_container_id(uid)
 
         for child in children:
             child_node = node.add_child_with_data(child)
-            await self._load_children(child_node)
+            await self._load_children_recursively(child_node)
 
     async def _get_root_node_object(self) -> RalObject:
         """
