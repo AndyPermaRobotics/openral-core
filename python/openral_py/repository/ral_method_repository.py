@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List, Optional
 
-from model.ral_method import RalMethod
+from openral_py.model.ral_method import RalMethod
 
 
 class RalMethodRepository(ABC):

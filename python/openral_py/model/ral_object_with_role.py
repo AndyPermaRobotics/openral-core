@@ -3,10 +3,10 @@ from typing import Any, Optional
 from openral_py.model.current_geo_location import CurrentGeoLocation
 from openral_py.model.definition import Definition
 from openral_py.model.identity import Identity
+from openral_py.model.ral_object import RalObject
 from openral_py.model.specific_properties import SpecificProperties
 from openral_py.model.specific_property import SpecificProperty
 from openral_py.model.template import Template
-from openral_py.ral_object import RalObject
 
 __all__ = ["CurrentGeoLocation", "Definition", "Identity", "SpecificProperties", "Template", "SpecificProperty", "RalObject"]
 

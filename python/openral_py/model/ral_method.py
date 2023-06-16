@@ -4,10 +4,10 @@ from typing import Any, Dict, List, Optional
 from openral_py.model.definition import Definition
 from openral_py.model.identity import Identity
 from openral_py.model.object_ref import ObjectRef
+from openral_py.model.ral_object import RalObject
 from openral_py.model.ral_object_with_role import RalObjectWithRole
 from openral_py.model.specific_properties import SpecificProperties
 from openral_py.model.template import Template
-from openral_py.ral_object import RalObject
 
 
 class RalMethod:

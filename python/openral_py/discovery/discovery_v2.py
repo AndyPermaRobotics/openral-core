@@ -1,12 +1,11 @@
 
 from typing import Dict, List
 
+from openral_py.discovery.graph_node import GraphNode
 from openral_py.discovery.model.discovery_dimension import DiscoveryDimension
 from openral_py.model.ral_object import RalObject
 from openral_py.model.specific_properties import SpecificProperties
 from openral_py.repository.ral_object_repository import RalObjectRepository
-
-from python.openral_py.discovery.graph_node import GraphNode
 
 
 class DiscoveryV2:
@@ -31,24 +30,22 @@ class DiscoveryV2:
             # at the moment only containerId is supported as primary discovery dimension, because it's a tree dimension and every RalObject has only one parent
 
         self.primary_discovery_dimension = primary_discovery_dimension
-        """The primary dimension is used to go upward in the RalObject tree first to find the root node. IMPORTANT: The primary dimension must be a tree dimension, so every RalObject has only one parent. e.g. container.UID"""
-
+        #The primary dimension is used to go upward in the RalObject tree first to find the root node. IMPORTANT: The primary dimension must be a tree dimension, so every RalObject has only one parent. e.g. container.UID
 
         self.discovery_dimensions = discovery_dimensions
-        """The dimensions that are used for the discovery. e.g. container.UID, owners, linkedObjectRef"""
-
+        #The dimensions that are used for the discovery. e.g. container.UID, owners, linkedObjectRef
 
         self.ral_repository = ral_repository
-        """The RAL repository to search for objects."""
+        #The RAL repository to search for objects.
 
         self.self_object = start_object
-        """The RAL object to start the discovery from."""
+        #The RAL object to start the discovery from.
 
         self.root_node_ral_type = root_node_ral_type
-        """The RALType of the desired root node of the discovery tree."""
+        #The RALType of the desired root node of the discovery tree.
 
         self._object_registry : Dict[str, GraphNode] = {}
-        """A registry of GraphNodes for RalObjects. The key is the UID of the RalObject. This is used to avoid loading the same Node multiple times."""
+        #A registry of GraphNodes for RalObjects. The key is the UID of the RalObject. This is used to avoid loading the same Node multiple times.
 
 
     async def execute(self) -> GraphNode:
@@ -66,7 +63,7 @@ class DiscoveryV2:
 
         #then we load the children recursively starting with the root node
         await self._load_dependencies_for_node_recursively(root_node)
-    
+
         return root_node
 
     async def _load_dependencies_for_node_recursively(self, node: GraphNode) -> None:
@@ -76,14 +73,14 @@ class DiscoveryV2:
 
         # collect the children and parents for every dimension
         for dimension in self.discovery_dimensions:
-            if(dimension is DiscoveryDimension.containerId):
+            if(dimension == DiscoveryDimension.containerId):
                 ral_objects = await self._get_children_for_dimension(node.data, dimension)
                 
                 new_nodes = self._integrate_objects(ral_objects, node, dimension, as_child=True)
 
                 all_new_nodes.extend(new_nodes)
 
-            if(dimension is DiscoveryDimension.owner):
+            elif(dimension == DiscoveryDimension.owner):
 
                 ral_objects = await self._get_parents_for_dimension(node.data, dimension)
 
@@ -96,11 +93,19 @@ class DiscoveryV2:
 
                 raise Exception(f"Dimension {dimension} is not supported yet.")
         
+        print(f"Loaded new nodes: {all_new_nodes} by loading dependencies for node: {node}")
 
         # for every new node we have to load the dependencies recursively
         for new_node in all_new_nodes:
+            
+            # todo test
+            if new_node.data.identity.uid != "A":
+                print(f"Skip {new_node.data.identity.uid}")
+                return
+
             await self._load_dependencies_for_node_recursively(new_node)
-       
+            
+
        
     def _integrate_objects(
             self, 
@@ -115,6 +120,9 @@ class DiscoveryV2:
         Creates new GraphNodes for the ral_objects if they are not already in the registry and returns all new GraphNodes.
         """
 
+
+        print(f"Integrate {[obj.identity.uid for obj in ral_objects]} with {dimension} into {current_node}")
+
         new_nodes : List[GraphNode] = []
 
         for ral_object in ral_objects:
@@ -128,6 +136,10 @@ class DiscoveryV2:
                 new_nodes.append(graph_node)
 
             if(as_child):
+
+                # todo test
+                print(f"Add {graph_node.data.identity.uid} as child to {current_node.data.identity.uid}")
+
                 current_node.add_child_node(dimension, graph_node)
             else:
                 current_node.add_parent_node(dimension, graph_node)

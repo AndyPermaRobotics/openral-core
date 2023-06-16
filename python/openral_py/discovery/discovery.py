@@ -3,9 +3,9 @@ from typing import List
 
 from openral_py.discovery.model.discovery_dimension import DiscoveryDimension
 from openral_py.discovery.tree_node import TreeNode
+from openral_py.model.ral_object import RalObject
 from openral_py.model.specific_properties import SpecificProperties
-from openral_py.ral_object import RalObject
-from openral_py.repository import RalRepository
+from openral_py.repository.ral_object_repository import RalObjectRepository
 
 
 class Discovery:
@@ -18,24 +18,22 @@ class Discovery:
 
     def __init__(
             self, 
-            ral_repository: RalRepository, 
+            ral_repository: RalObjectRepository, 
             start_object: RalObject, 
             root_node_ral_type: str,
             discovery_dimensions: List[DiscoveryDimension] = []
         ):
-
         self.discovery_dimensions = discovery_dimensions
-        """The dimensions that are used for the discovery. e.g. container.UID, owners, linkedObjectRef"""
-
+        #The dimensions that are used for the discovery. e.g. container.UID, owners, linkedObjectRef
 
         self.ral_repository = ral_repository
-        """The RAL repository to search for objects."""
+        #The RAL repository to search for objects.
 
         self.self_object = start_object
-        """The RAL object to start the discovery from."""
+        #The RAL object to start the discovery from.
 
         self.root_node_ral_type = root_node_ral_type
-        """The RALType of the desired root node of the discovery tree."""
+        #The RALType of the desired root node of the discovery tree.
 
     async def execute(self) -> TreeNode:
         """
@@ -53,7 +51,7 @@ class Discovery:
 
     async def _load_children_recursively(self, node: TreeNode) -> None:
         uid = node.data.identity.uid
-        children = await self.ral_repository.get_ral_objects_with_container_id(uid)
+        children = await self.ral_repository.get_by_container_id(uid)
 
         for child in children:
             child_node = node.add_child_with_data(child)
@@ -67,7 +65,7 @@ class Discovery:
 
         while current_object.template.ral_type != self.root_node_ral_type:
             container_id = self._get_container_id_or_fail(current_object)
-            current_object = await self.ral_repository.get_ral_object_by_uid(uid=container_id)
+            current_object = await self.ral_repository.get_by_uid(uid=container_id)
 
         return current_object
 
