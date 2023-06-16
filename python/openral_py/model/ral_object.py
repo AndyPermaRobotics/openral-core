@@ -4,6 +4,7 @@ from typing import Callable
 from openral_py.model.current_geo_location import CurrentGeoLocation
 from openral_py.model.definition import Definition
 from openral_py.model.identity import Identity
+from openral_py.model.object_ref import ObjectRef
 from openral_py.model.owner_ref import OwnerRef
 from openral_py.model.specific_properties import SpecificProperties
 from openral_py.model.template import Template
@@ -78,7 +79,7 @@ class RalObject:
             location_history_ref: list[str] = [], 
             owner_history_ref: list[OwnerRef] = [], 
             method_history_ref: list[str] = [], 
-            linked_object_ref: list[str] = []
+            linked_object_ref: list[ObjectRef] = [] #todo: ObjectRef has 'role', is that correct here or do we need 'RALType' instead?
         ):
         self.identity = identity
         self.current_owners = current_owners
@@ -123,7 +124,7 @@ class RalObject:
             "locationHistoryRef": self.location_history_ref,
             "ownerHistoryRef": [value.to_map() for value in self.owner_history_ref],
             "methodHistoryRef": self.method_ristory_ref,
-            "linkedObjectRef": self.linked_object_ref
+            "linkedObjectRef": [value.to_map() for value in self.linked_object_ref],
         }
     
     @staticmethod
@@ -140,7 +141,7 @@ class RalObject:
         location_history_ref = map.get("locationHistoryRef", [])
         owner_history_ref = [OwnerRef.from_map(value) for value in map.get("ownerHistoryRef", [])]
         method_history_ref = map.get("methodHistoryRef", [])
-        linked_object_ref = map.get("linkedObjectRef", [])
+        linked_object_ref = [ObjectRef.from_map(value) for value in map.get("linkedObjectRef", [])]
 
         return RalObject(
             identity=identity,

@@ -31,18 +31,11 @@ class GraphNode:
     
         """
     
-        #todo test
-        #if self.data.identity.uid == "wurzel":
-        #    print(f"add_child_node {node.data.identity.uid}")
-
 
         if dimension not in self._children_map:
             self._children_map[dimension] = [node]
         else:
             self._children_map[dimension].append(node)
-
-        #todo test
-        print(f"new children {self.data.identity.uid} {dimension}: {self._children_map[dimension]}")
 
 
     def add_parent_node(self, dimension: DiscoveryDimension, node: "GraphNode"):
@@ -71,8 +64,6 @@ class GraphNode:
         """
         
         if dimension in self._children_map:
-            #todo just testing
-            print(f"children {self.data.identity.uid} {dimension}: {self._children_map[dimension]}") 
             return self._children_map[dimension]
         
         return []

@@ -17,13 +17,16 @@ class MockDataDiscoveryV2:
             - C
                 
             
-    Hierary of the RalObjects by owner:  (F has two owners A and Start)      
+    Hierarchy of the RalObjects by owner:  (F has two owners A and Start)      
     - A
         - F
     - Start
         - F
             - B
- 
+
+    Dependencies of the RalObjects by linkedObjectRef:
+    wurzel <-> F (bidirectional)
+    
     
     """
 
@@ -53,7 +56,12 @@ class MockDataDiscoveryV2:
             "locationHistoryRef": [],
             "ownerHistoryRef": [],
             "methodHistoryRef": [],
-            "linkedObjectRef": []
+            "linkedObjectRef": [
+                {
+                    "UID": "F", # <- F
+                    "role": "",
+                },
+            ]
         },
         "A": {
             "identity": {
@@ -275,7 +283,12 @@ class MockDataDiscoveryV2:
             "locationHistoryRef": [],
             "ownerHistoryRef": [],
             "methodHistoryRef": [],
-            "linkedObjectRef": []
+            "linkedObjectRef": [
+                {
+                    "UID": "wurzel", # <- wurzel
+                    "role": "",
+                },
+            ]
         },
     }
 

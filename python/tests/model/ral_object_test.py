@@ -65,7 +65,12 @@ class TestRalObject:
                 }
             ],
             "methodHistoryRef": [],
-            "linkedObjectRef": []
+            "linkedObjectRef": [
+                {
+                    "UID": "linkedObjUid",
+                    "role": "linkedObjRole",
+                },
+            ]
         }
 
         #Act
@@ -118,7 +123,8 @@ class TestRalObject:
         assert ral_object.owner_history_ref[0].uid == "456", "owner_history_ref[0].uid is 456"
 
         assert ral_object.method_ristory_ref == []
-        assert ral_object.linked_object_ref == []
+        assert len(ral_object.linked_object_ref) == 1, "linked_object_ref has one element"
+        assert ral_object.linked_object_ref[0].uid == "linkedObjUid", "linked_object_ref[0].uid is linkedObjUid"
     
     
     def test_from_map_minimum_data(self):

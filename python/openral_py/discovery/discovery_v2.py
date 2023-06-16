@@ -73,14 +73,14 @@ class DiscoveryV2:
 
         # collect the children and parents for every dimension
         for dimension in self.discovery_dimensions:
-            if(dimension == DiscoveryDimension.containerId):
+            if dimension == DiscoveryDimension.containerId :
                 ral_objects = await self._get_children_for_dimension(node.data, dimension)
                 
                 new_nodes = self._integrate_objects(ral_objects, node, dimension, as_child=True)
 
                 all_new_nodes.extend(new_nodes)
 
-            elif(dimension == DiscoveryDimension.owner):
+            elif dimension == DiscoveryDimension.owner:
 
                 ral_objects = await self._get_parents_for_dimension(node.data, dimension)
 
@@ -88,9 +88,15 @@ class DiscoveryV2:
 
                 all_new_nodes.extend(new_nodes)
 
-            else:
-                # todo implement the other dimensions
+            elif dimension == DiscoveryDimension.linkedObjectRef:
+                ral_objects = await self._get_children_for_dimension(node.data, dimension)
+                
+                new_nodes = self._integrate_objects(ral_objects, node, dimension, as_child=True)
 
+                all_new_nodes.extend(new_nodes)
+
+            else:
+                
                 raise Exception(f"Dimension {dimension} is not supported yet.")
         
         print(f"Loaded new nodes: {all_new_nodes} by loading dependencies for node: {node}")
@@ -131,9 +137,6 @@ class DiscoveryV2:
 
             if(as_child):
 
-                # todo test
-                print(f"Add {graph_node.data.identity.uid} as child to {current_node.data.identity.uid}")
-
                 graph_node.add_parent_node(dimension, current_node)
                 current_node.add_child_node(dimension, graph_node)
             else:
@@ -172,8 +175,18 @@ class DiscoveryV2:
         Returns the RalObjects that are referencing the given RalObject in the given dimension.
         e.g. if the dimension is DiscoveryDimension.containerId, then all RalObjects that have the given RalObject as container will be returned.
         """
-        if(dimension == DiscoveryDimension.containerId):
+        if dimension == DiscoveryDimension.containerId:
             return await self.ral_repository.get_by_container_id(ral_object.identity.uid)
+
+        elif dimension == DiscoveryDimension.linkedObjectRef:
+            linked_obj_ref = ral_object.linked_object_ref
+
+            ral_objects = []
+            for ref in linked_obj_ref:
+                ral_object = await self.ral_repository.get_by_uid(ref.uid)
+                ral_objects.append(ral_object)
+
+            return ral_objects
 
         else:
             raise Exception(f"Dimension {dimension} is not supported to find children yet.")

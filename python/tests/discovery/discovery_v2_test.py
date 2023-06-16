@@ -47,7 +47,7 @@ class TestDiscovery:
             start_object= await ral_repository.get_by_uid("Start"),
             root_node_ral_type= "wurzel_type", #we want to find the root node of the tree that has this ral type
             primary_discovery_dimension = DiscoveryDimension.containerId,
-            discovery_dimensions = [DiscoveryDimension.containerId,DiscoveryDimension.owner]
+            discovery_dimensions = [DiscoveryDimension.containerId,DiscoveryDimension.owner, DiscoveryDimension.linkedObjectRef]
         )
 
         wurzel = await discovery.execute()
@@ -59,6 +59,8 @@ class TestDiscovery:
         # Check root node
         self.check_relationship(wurzel, ["A","B"], DiscoveryDimension.containerId)
         self.check_relationship(wurzel, [], DiscoveryDimension.owner)
+        self.check_relationship(wurzel, ["F"], DiscoveryDimension.linkedObjectRef)
+
 
         # check children of root node
         A = wurzel.get_child_with_uid("A")
@@ -77,6 +79,7 @@ class TestDiscovery:
         assert F is not None, "'B' should have a parent with uid 'F'"
         self.check_relationship(F, [], DiscoveryDimension.containerId)
         self.check_relationship(F, ["B"], DiscoveryDimension.owner)
+        self.check_relationship(F, ["wurzel"], DiscoveryDimension.linkedObjectRef)
 
         Start = A.get_child_with_uid("Start")
         assert Start is not None, "'A' should have a child with uid 'Start'"
