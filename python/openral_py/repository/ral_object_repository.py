@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import Callable, List, Optional, TypeVar
 
+from openral_py.model.ral_object import RalObject
 from openral_py.model.specific_properties import SpecificProperties
-from openral_py.ral_object import RalObject
 
 #todo generics
 S = TypeVar('S', bound=SpecificProperties)

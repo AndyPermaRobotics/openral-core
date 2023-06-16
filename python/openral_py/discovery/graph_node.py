@@ -1,84 +1,87 @@
 from typing import Any, Dict, List, Optional
 
 from openral_py.discovery.model.discovery_dimension import DiscoveryDimension
+from openral_py.model.ral_object import RalObject
 
 
 class GraphNode:
     """
     Defines a node in graph with different dimensions/relation types.
-    The node can be referenced by other nodes and can reference other nodes in different dimensions.
+    The node can be referenced by other nodes=children and can reference other nodes=parents in different dimensions.
+
+    We choose to use a graph instead of a tree, because a RalObject can have multiple parents in different dimensions.
+    We still use "chilren" as a term for nodes that are referencing this node and "parents" as a term for nodes that are referenced by this node, because it's easier to distinguish than "refered by" and "referencing".
+
     """
     def __init__(self, 
-                 data : Any, 
-                 referencedByMap : Dict[DiscoveryDimension,List['GraphNode']] = {}, 
-                 referencingMap : Dict[DiscoveryDimension,List['GraphNode']] = {}
+                 data : RalObject, #note: we could use a generic type here, but it's not foreseeable that we will need it 
+                 children_map : Dict[DiscoveryDimension,List['GraphNode']] = {}, 
+                 parents_map : Dict[DiscoveryDimension,List['GraphNode']] = {}
             ):
         self.data = data
         """The data of the node. e.g. a RalObject"""
 
-        #todo: 'children' and 'parent' are not the best names. Because it must not be a hierarchical tree for every dimension. Its more like 
+        self._children_map = children_map
+        """The GraphNodes that are referencing this GraphNode. The GraphNodes are grouped by the dimensions. e.g. if GraphNode B is referencing GraphNode A with DiscoveryDimension.containerId, then children_map[DiscoveryDimension.containerId] contains B."""
 
-        self._referencedByMap = referencedByMap
-        """The GraphNodes that are referencing this GraphNode. The GraphNodes are grouped by the dimensions. e.g. if GraphNode B is referencing GraphNode A with DiscoveryDimension.containerId, then referencedByMap[DiscoveryDimension.containerId] contains B."""
+        self._parents_Map = parents_map
+        """The GraphNodes that are referenced by this GraphNode. The GraphNodes are grouped by the dimensions. e.g. if this GraphNode is referencing GraphNode C with DiscoveryDimension.containerId, then parents_map[DiscoveryDimension.containerId] contains C."""
 
-        self._referencingMap = referencingMap
-        """The GraphNodes that are referenced by this GraphNode. The GraphNodes are grouped by the dimensions. e.g. if this GraphNode is referencing GraphNode C with DiscoveryDimension.containerId, then referencingMap[DiscoveryDimension.containerId] contains C."""
-
-    def add_referenced_by_node(self, dimension: DiscoveryDimension, node: "GraphNode"):
+    def add_child_node(self, dimension: DiscoveryDimension, node: "GraphNode"):
         """
-        Appends the given node to the _referencedByMap map.
+        Appends the given node to the children for the given dimension.
         """
     
-        if dimension not in self._referencedByMap:
-            self._referencedByMap[dimension] = [node]
+        if dimension not in self._children_map:
+            self._children_map[dimension] = [node]
         else:
-            self._referencedByMap[dimension].append(node)
+            self._children_map[dimension].append(node)
 
-    def add_referencing_node(self, dimension: DiscoveryDimension, node: "GraphNode"):
+    def add_parent_node(self, dimension: DiscoveryDimension, node: "GraphNode"):
         """
-        Appends the given node to the _referencingMap map.
+        Appends the given node to the parents of the given dimension.
         """
 
-        if dimension not in self._referencingMap:
-            self._referencingMap[dimension] = [node]
+        if dimension not in self._parents_Map:
+            self._parents_Map[dimension] = [node]
         else:
-            self._referencingMap[dimension].append(node)
+            self._parents_Map[dimension].append(node)
 
 
-    def all_referenced_by(self) -> List['GraphNode']:
+    def all_children(self) -> List['GraphNode']:
         """
         Returns all GraphNodes that are referencing this GraphNode.
         """
-        referenced_by = []
-        for dimension in self._referencedByMap:
-            referenced_by.extend(self._referencedByMap[dimension])
-        return referenced_by
+        all_children = []
+        for dimension in self._children_map:
+            all_children.extend(self._children_map[dimension])
+        return all_children
 
-    def referenced_by(self, dimension: DiscoveryDimension) -> List['GraphNode']:
+    def children(self, dimension: DiscoveryDimension) -> List['GraphNode']:
         """
         Returns all GraphNodes that are referencing this GraphNode in the given dimension.
         """
         
-        if dimension in self._referencedByMap:
-            return self._referencedByMap[dimension]
+        if dimension in self._children_map:
+            return self._children_map[dimension]
         
         return []
     
-    def all_referencing(self) -> List['GraphNode']:
+    def all_parents(self) -> List['GraphNode']:
         """
         Returns all GraphNodes that are referenced by this GraphNode.
         """
         referencing = []
-        for dimension in self._referencingMap:
-            referencing.extend(self._referencingMap[dimension])
+        for dimension in self._parents_Map:
+            referencing.extend(self._parents_Map[dimension])
         return referencing
     
-    def referencing(self, dimension: DiscoveryDimension) -> List['GraphNode']:
+    def parents(self, dimension: DiscoveryDimension) -> List['GraphNode']:
         """
         Returns all GraphNodes that are referenced by this GraphNode in the given dimension.
         """
-        if dimension in self._referencingMap:
-            return self._referencingMap[dimension]
+        if dimension in self._parents_Map:
+            return self._parents_Map[dimension]
         
         return []
 
@@ -87,8 +90,8 @@ class GraphNode:
         """
         Returns true if the node is not referencing any other node in the given dimension.
         """
-        if dimension in self._referencingMap:
-            return len(self._referencingMap[dimension]) == 0
+        if dimension in self._parents_Map:
+            return len(self._parents_Map[dimension]) == 0
         else:
             return True
 
@@ -96,8 +99,8 @@ class GraphNode:
         """
         Returns true if the node is not referenced by any other node in the given dimension.
         """
-        if dimension in self._referencedByMap:
-            return len(self._referencedByMap[dimension]) == 0
+        if dimension in self._children_map:
+            return len(self._children_map[dimension]) == 0
         else:
             return True
 
