@@ -1,3 +1,7 @@
+import 'package:either_dart/either.dart';
+import 'package:openral_flutter/cross/backend/parsing/parsing_error.dart';
+import 'package:openral_flutter/model_parser/template_parser.dart';
+
 class Template {
   final String ralType;
   final String version;
@@ -15,5 +19,11 @@ class Template {
       'version': version,
       'objectStateTemplates': objectStateTemplates,
     };
+  }
+
+  static Either<Template, ParsingError> fromMap(map) {
+    final templateParser = TemplateParser();
+
+    return templateParser.fromMap(map);
   }
 }

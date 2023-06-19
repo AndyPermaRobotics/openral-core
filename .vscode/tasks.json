@@ -5,6 +5,12 @@
     "tasks": [
         {
             "type": "shell",
+            "label": "Flutter: Run tests of file",
+            "command": "cd flutter/openral_flutter && flutter test ${file}",
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
             "label": "Python: Run tests of file",
             "command": "cd python && python3 -m pytest ${file}",
             "problemMatcher": []

@@ -1,3 +1,7 @@
+import 'package:either_dart/either.dart';
+import 'package:openral_flutter/cross/backend/parsing/parsing_error.dart';
+import 'package:openral_flutter/model_parser/identity_parser.dart';
+
 class Identity {
   final String uid;
   final String? name;
@@ -21,5 +25,11 @@ class Identity {
       "alternateIDs": alternateIDs,
       "alternateNames": alternateNames,
     };
+  }
+
+  static Either<Identity, ParsingError> fromMap(map) {
+    final identityParser = IdentityParser();
+
+    return identityParser.fromMap(map);
   }
 }
