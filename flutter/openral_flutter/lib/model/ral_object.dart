@@ -3,6 +3,7 @@ import 'package:openral_flutter/cross/backend/parsing/parsing_error.dart';
 import 'package:openral_flutter/model/current_geo_location.dart';
 import 'package:openral_flutter/model/definition.dart';
 import 'package:openral_flutter/model/identity.dart';
+import 'package:openral_flutter/model/object_ref.dart';
 import 'package:openral_flutter/model/specific_properties.dart';
 import 'package:openral_flutter/model/template.dart';
 import 'package:openral_flutter/model_parser/ral_object_parser.dart';
@@ -63,7 +64,7 @@ import 'package:openral_flutter/model_parser/ral_object_parser.dart';
 class RalObject<S extends SpecificProperties> {
   final Identity identity;
 
-  final List<String> currentOwners;
+  final List<ObjectRef> currentOwners;
 
   final Definition definition;
 
@@ -73,7 +74,7 @@ class RalObject<S extends SpecificProperties> {
 
   final S _specificProperties;
 
-  final CurrentGeoLocation currentGeolocation;
+  final CurrentGeoLocation currentGeoLocation;
 
   final List<String> locationHistoryRef;
 
@@ -81,7 +82,7 @@ class RalObject<S extends SpecificProperties> {
 
   final List<String> methodHistoryRef;
 
-  final List<String> linkedObjectRef;
+  final List<ObjectRef> linkedObjectRef;
 
   RalObject({
     required this.identity,
@@ -90,11 +91,11 @@ class RalObject<S extends SpecificProperties> {
     this.objectState = "undefined",
     required this.template,
     required S specificProperties,
-    this.currentGeolocation = const CurrentGeoLocation(),
+    this.currentGeoLocation = const CurrentGeoLocation(),
     this.locationHistoryRef = const [],
     this.ownerHistoryRef = const [],
     this.methodHistoryRef = const [],
-    this.linkedObjectRef = const [],
+    this.linkedObjectRef = const <ObjectRef>[],
   }) : _specificProperties = specificProperties;
 
   ///by defining a getter, we can override SpecificProperties in subclasses
@@ -136,7 +137,7 @@ class RalObject<S extends SpecificProperties> {
       objectState: objectState,
       template: template,
       specificProperties: specificPropertiesTransform(specificProperties), //transform the specific properties
-      currentGeolocation: currentGeolocation,
+      currentGeoLocation: currentGeoLocation,
       locationHistoryRef: locationHistoryRef,
       ownerHistoryRef: ownerHistoryRef,
       methodHistoryRef: methodHistoryRef,
@@ -147,16 +148,16 @@ class RalObject<S extends SpecificProperties> {
   Map<String, dynamic> toMap() {
     return {
       "identity": identity.toMap(),
-      "currentOwners": currentOwners,
+      "currentOwners": currentOwners.map<Map<String, dynamic>>((e) => e.toMap()).toList(),
       "definition": definition.toMap(),
       "objectState": objectState,
       "template": template.toMap(),
       "specificProperties": specificProperties.toMaps(),
-      "currentGeolocation": currentGeolocation.toMap(),
+      "currentGeolocation": currentGeoLocation.toMap(),
       "locationHistoryRef": locationHistoryRef,
       "ownerHistoryRef": ownerHistoryRef,
       "methodHistoryRef": methodHistoryRef,
-      "linkedObjectRef": linkedObjectRef,
+      "linkedObjectRef": linkedObjectRef.map<Map<String, dynamic>>((e) => e.toMap()).toList(),
     };
   }
 }

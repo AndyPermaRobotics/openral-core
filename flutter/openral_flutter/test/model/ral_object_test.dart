@@ -2,6 +2,7 @@ import 'package:openral_flutter/model/container.dart';
 import 'package:openral_flutter/model/current_geo_location.dart';
 import 'package:openral_flutter/model/definition.dart';
 import 'package:openral_flutter/model/identity.dart';
+import 'package:openral_flutter/model/object_ref.dart';
 import 'package:openral_flutter/model/ral_object.dart';
 import 'package:openral_flutter/model/specific_properties.dart';
 import 'package:openral_flutter/model/specific_property.dart';
@@ -24,7 +25,9 @@ void main() {
                 "alternateIDs": ["9876"],
                 "alternateNames": ["myName"],
               },
-              "currentOwners": [],
+              "currentOwners": [
+                {"UID": "ownerUid", "role": "ownerRole"}
+              ],
               "definition": {
                 "definitionText": "An object or entity that is not or cannot be named specifically",
                 "definitionURL": "https://www.thefreedictionary.com/thing"
@@ -63,7 +66,9 @@ void main() {
               "locationHistoryRef": [],
               "ownerHistoryRef": [],
               "methodHistoryRef": [],
-              "linkedObjectRef": []
+              "linkedObjectRef": [
+                {"UID": "linkedObjectUid", "role": "linkedObjectRole"}
+              ]
             };
 
             final result = RalObject.fromMap(data);
@@ -78,7 +83,8 @@ void main() {
             expect(ralObject.identity.alternateIDs, equals(["9876"]));
             expect(ralObject.identity.alternateNames, equals(["myName"]));
 
-            expect(ralObject.currentOwners, equals([]));
+            expect(ralObject.currentOwners.length, equals(1), reason: "currentOwners should contain one element");
+            expect(ralObject.currentOwners[0].uid, equals("ownerUid"));
 
             expect(ralObject.definition.definitionText, equals("An object or entity that is not or cannot be named specifically"));
             expect(ralObject.definition.definitionURL, equals("https://www.thefreedictionary.com/thing"));
@@ -95,13 +101,15 @@ void main() {
               reason: "specificProperties should contain the key 'serial number'",
             );
 
-            expect(ralObject.currentGeolocation.container!.uid, equals("unknown"));
+            expect(ralObject.currentGeoLocation.container!.uid, equals("unknown"));
             //TODO: Other geo location fields
 
             expect(ralObject.locationHistoryRef, equals([]), reason: "locationHistoryRef should be empty");
             expect(ralObject.ownerHistoryRef, equals([]), reason: "ownerHistoryRef should be empty");
             expect(ralObject.methodHistoryRef, equals([]), reason: "methodHistoryRef should be empty");
-            expect(ralObject.linkedObjectRef, equals([]), reason: "linkedObjectRef should be empty");
+
+            expect(ralObject.linkedObjectRef.length, equals(1), reason: "linkedObjectRef should contain one element");
+            expect(ralObject.linkedObjectRef[0].uid, equals("linkedObjectUid"));
           });
         },
       );
@@ -117,7 +125,12 @@ void main() {
               alternateIDs: ["alternateID1"],
               alternateNames: ["alternateName1"],
             ),
-            currentOwners: ["currentOwner1"],
+            currentOwners: [
+              ObjectRef(
+                uid: 'ownerUid',
+                role: 'ownerRole',
+              ),
+            ],
             definition: Definition(
               definitionText: "definitionText1",
               definitionURL: "definitionURL1",
@@ -140,7 +153,7 @@ void main() {
                 unit: "unit2",
               ),
             }),
-            currentGeolocation: CurrentGeoLocation(
+            currentGeoLocation: CurrentGeoLocation(
               container: Container(
                 uid: "uid1",
               ),
@@ -148,7 +161,12 @@ void main() {
             locationHistoryRef: ["locationHistoryRef1"],
             ownerHistoryRef: ["ownerHistoryRef1"],
             methodHistoryRef: ["methodHistoryRef1"],
-            linkedObjectRef: ["linkedObjectRef1"],
+            linkedObjectRef: [
+              ObjectRef(
+                uid: 'linkedObjectUid',
+                role: 'linkedObjectRole',
+              ),
+            ],
           );
 
           //act
@@ -165,7 +183,9 @@ void main() {
                 "alternateIDs": ["alternateID1"],
                 "alternateNames": ["alternateName1"],
               },
-              "currentOwners": ["currentOwner1"],
+              "currentOwners": [
+                {"UID": "ownerUid", "role": "ownerRole"}
+              ],
               "definition": {
                 "definitionText": "definitionText1",
                 "definitionURL": "definitionURL1",
@@ -210,7 +230,12 @@ void main() {
               "locationHistoryRef": ["locationHistoryRef1"],
               "ownerHistoryRef": ["ownerHistoryRef1"],
               "methodHistoryRef": ["methodHistoryRef1"],
-              "linkedObjectRef": ["linkedObjectRef1"],
+              "linkedObjectRef": [
+                {
+                  "UID": "linkedObjectUid",
+                  "role": "linkedObjectRole",
+                },
+              ],
             }),
           );
         });

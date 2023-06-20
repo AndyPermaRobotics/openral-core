@@ -7,83 +7,91 @@ import 'package:openral_flutter/cross/backend/parsing/parser_factory.dart';
 import 'package:openral_flutter/model/current_geo_location.dart';
 import 'package:openral_flutter/model/definition.dart';
 import 'package:openral_flutter/model/identity.dart';
+import 'package:openral_flutter/model/object_ref.dart';
 import 'package:openral_flutter/model/ral_object.dart';
 import 'package:openral_flutter/model/specific_properties.dart';
 import 'package:openral_flutter/model/template.dart';
 import 'package:openral_flutter/model_parser/definition_parser.dart';
 import 'package:openral_flutter/model_parser/geo_location_parser.dart';
 import 'package:openral_flutter/model_parser/identity_parser.dart';
+import 'package:openral_flutter/model_parser/object_ref_parser.dart';
 import 'package:openral_flutter/model_parser/specific_properties_parser.dart';
 import 'package:openral_flutter/model_parser/template_parser.dart';
 
 class RalObjectParser<S extends SpecificProperties> extends ParserFactory<RalObject<S>> {
-  ParsableFieldNested<Identity> IDENTITY_FIELD = ParsableFieldNested(
+  final ParsableFieldNested<Identity> IDENTITY_FIELD = ParsableFieldNested(
     "identity",
     isRequired: true,
     parserFactory: IdentityParser(),
   );
 
-  ParsableListField<String> CURRENT_OWNERS_FIELD = ParsableListField<String>(
+  final ParsableListField<ObjectRef> CURRENT_OWNERS_FIELD = ParsableListField<ObjectRef>(
     "currentOwners",
     isRequired: false,
     defaultValue: [],
-    singleField: ParsableFieldString(""),
+    singleField: ParsableFieldNested<ObjectRef>(
+      "",
+      parserFactory: ObjectRefParser(),
+    ),
   );
 
-  ParsableFieldNested<Definition> DEFINITION_FIELD = ParsableFieldNested(
+  final ParsableFieldNested<Definition> DEFINITION_FIELD = ParsableFieldNested(
     "definition",
     isRequired: false,
     defaultValue: null,
     parserFactory: DefinitionParser(),
   );
 
-  ParsableFieldString OBJECT_STATE_FIELD = ParsableFieldString(
+  final ParsableFieldString OBJECT_STATE_FIELD = const ParsableFieldString(
     "objectState",
     isRequired: false,
     defaultValue: "undefined",
   );
 
-  ParsableFieldNested<Template> TEMPLATE_FIELD = ParsableFieldNested(
+  final ParsableFieldNested<Template> TEMPLATE_FIELD = ParsableFieldNested(
     "template",
     isRequired: true,
     parserFactory: TemplateParser(),
   );
 
-  ParsableFieldCustomSimple<SpecificProperties> SPECIFIC_PROPERTIES_FIELD = SpecificPropertiesParser();
+  final ParsableFieldCustomSimple<SpecificProperties> SPECIFIC_PROPERTIES_FIELD = SpecificPropertiesParser();
 
-  ParsableFieldNested<CurrentGeoLocation> CURRENT_GEOLOCATION_FIELD = ParsableFieldNested(
+  final ParsableFieldNested<CurrentGeoLocation> CURRENT_GEOLOCATION_FIELD = ParsableFieldNested(
     "currentGeolocation",
     isRequired: false,
     defaultValue: null,
     parserFactory: GeoLocationParser(),
   );
 
-  ParsableListField<String> LOCATION_HISTORY_REF_FIELD = ParsableListField<String>(
+  final ParsableListField<String> LOCATION_HISTORY_REF_FIELD = const ParsableListField<String>(
     "locationHistoryRef",
     isRequired: false,
     defaultValue: [],
     singleField: ParsableFieldString(""),
   );
 
-  ParsableListField<String> OWNER_HISTORY_REF_FIELD = ParsableListField<String>(
+  final ParsableListField<String> OWNER_HISTORY_REF_FIELD = const ParsableListField<String>(
     "ownerHistoryRef",
     isRequired: false,
     defaultValue: [],
     singleField: ParsableFieldString(""),
   );
 
-  ParsableListField<String> METHOD_HISTORY_REF_FIELD = ParsableListField<String>(
+  final ParsableListField<String> METHOD_HISTORY_REF_FIELD = const ParsableListField<String>(
     "methodHistoryRef",
     isRequired: false,
     defaultValue: [],
     singleField: ParsableFieldString(""),
   );
 
-  ParsableListField<String> LINKED_OBJECT_REF_FIELD = ParsableListField<String>(
+  final ParsableListField<ObjectRef> LINKED_OBJECT_REF_FIELD = ParsableListField<ObjectRef>(
     "linkedObjectRef",
     isRequired: false,
     defaultValue: [],
-    singleField: ParsableFieldString(""),
+    singleField: ParsableFieldNested<ObjectRef>(
+      "",
+      parserFactory: ObjectRefParser(),
+    ),
   );
 
   @override
@@ -95,7 +103,7 @@ class RalObjectParser<S extends SpecificProperties> extends ParserFactory<RalObj
       objectState: parsedValues[OBJECT_STATE_FIELD]!,
       template: parsedValues[TEMPLATE_FIELD]!,
       specificProperties: parsedValues[SPECIFIC_PROPERTIES_FIELD],
-      currentGeolocation: parsedValues[CURRENT_GEOLOCATION_FIELD],
+      currentGeoLocation: parsedValues[CURRENT_GEOLOCATION_FIELD],
       locationHistoryRef: parsedValues[LOCATION_HISTORY_REF_FIELD]!,
       ownerHistoryRef: parsedValues[OWNER_HISTORY_REF_FIELD]!,
       methodHistoryRef: parsedValues[METHOD_HISTORY_REF_FIELD]!,

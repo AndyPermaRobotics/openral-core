@@ -5,6 +5,24 @@
     "tasks": [
         {
             "type": "shell",
+            "label": "Translate to Python",
+            "command": "python3 /Users/andreasblech/Projects/AI/ai-code-translator/main_single.py --file=${file} --targetLanguage=python",
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "label": "Translate to Typescript",
+            "command": "python3 /Users/andreasblech/Projects/AI/ai-code-translator/main_single.py --file=${file} --targetLanguage=typescript",
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "label": "Translate to Flutter/dart",
+            "command": "python3 /Users/andreasblech/Projects/AI/ai-code-translator/main_single.py --file=${file} --targetLanguage=dart",
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
             "label": "Flutter: Run tests of file",
             "command": "cd flutter/openral_flutter && flutter test ${file}",
             "problemMatcher": []

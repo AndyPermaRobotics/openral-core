@@ -1,6 +1,7 @@
 import 'package:openral_flutter/model/current_geo_location.dart';
 import 'package:openral_flutter/model/definition.dart';
 import 'package:openral_flutter/model/identity.dart';
+import 'package:openral_flutter/model/object_ref.dart';
 import 'package:openral_flutter/model/ral_object.dart';
 import 'package:openral_flutter/model/specific_properties.dart';
 import 'package:openral_flutter/model/template.dart';
@@ -15,18 +16,18 @@ class RalObjectWithRole extends RalObject {
     required Template template,
     required SpecificProperties specificProperties,
     required CurrentGeoLocation currentGeolocation,
-    List<String> currentOwners = const [],
+    List<ObjectRef> currentOwners = const [],
     String objectState = 'undefined',
     List<String> locationHistoryRef = const [],
     List<String> ownerHistoryRef = const [],
     List<String> methodHistoryRef = const [],
-    List<String> linkedObjectRef = const [],
+    List<ObjectRef> linkedObjectRef = const [],
   }) : super(
           identity: identity,
           definition: definition,
           template: template,
           specificProperties: specificProperties,
-          currentGeolocation: currentGeolocation,
+          currentGeoLocation: currentGeolocation,
           currentOwners: currentOwners,
           objectState: objectState,
           locationHistoryRef: locationHistoryRef,
@@ -49,7 +50,7 @@ class RalObjectWithRole extends RalObject {
       definition: object.definition,
       template: object.template,
       specificProperties: object.specificProperties,
-      currentGeolocation: object.currentGeolocation,
+      currentGeolocation: object.currentGeoLocation,
       currentOwners: object.currentOwners,
       objectState: object.objectState,
       locationHistoryRef: object.locationHistoryRef,

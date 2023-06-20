@@ -5,7 +5,6 @@ from openral_py.model.current_geo_location import CurrentGeoLocation
 from openral_py.model.definition import Definition
 from openral_py.model.identity import Identity
 from openral_py.model.object_ref import ObjectRef
-from openral_py.model.owner_ref import OwnerRef
 from openral_py.model.specific_properties import SpecificProperties
 from openral_py.model.template import Template
 
@@ -74,12 +73,12 @@ class RalObject:
             template: Template, 
             specific_properties: SpecificProperties, 
             current_geo_location: CurrentGeoLocation = CurrentGeoLocation(), 
-            current_owners: list[OwnerRef] = [], 
+            current_owners: list[ObjectRef] = [], 
             object_state: str = "undefined", 
             location_history_ref: list[str] = [], 
-            owner_history_ref: list[OwnerRef] = [], 
+            owner_history_ref: list[ObjectRef] = [], 
             method_history_ref: list[str] = [], 
-            linked_object_ref: list[ObjectRef] = [] #todo: ObjectRef has 'role', is that correct here or do we need 'RALType' instead?
+            linked_object_ref: list[ObjectRef] = []
         ):
         self.identity = identity
         self.current_owners = current_owners
@@ -132,14 +131,14 @@ class RalObject:
     
         identity = Identity.from_map(map.get("identity", {}))
 
-        current_owners = [OwnerRef.from_map(value) for value in map.get("currentOwners", [])]    
+        current_owners = [ObjectRef.from_map(value) for value in map.get("currentOwners", [])]    
         definition = Definition.from_map(map.get("definition", {}))
         object_state = map.get("objectState", "undefined")
         template = Template.from_map(map.get("template", {}))
         specific_properties = SpecificProperties.from_maps(map.get("specificProperties", []))
         current_geo_location = CurrentGeoLocation.from_map(map.get("currentGeolocation", {}))
         location_history_ref = map.get("locationHistoryRef", [])
-        owner_history_ref = [OwnerRef.from_map(value) for value in map.get("ownerHistoryRef", [])]
+        owner_history_ref = [ObjectRef.from_map(value) for value in map.get("ownerHistoryRef", [])]
         method_history_ref = map.get("methodHistoryRef", [])
         linked_object_ref = [ObjectRef.from_map(value) for value in map.get("linkedObjectRef", [])]
 
