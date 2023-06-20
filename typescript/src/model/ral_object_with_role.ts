@@ -1,3 +1,4 @@
+import { ObjectRef } from "model/object_ref";
 import { RalObject } from "model/ral_object";
 import { CurrentGeoLocation } from "./current_geo_location";
 import { Definition } from "./definition";
@@ -26,12 +27,12 @@ export class RalObjectWithRole extends RalObject {
         template: Template,
         specificProperties: SpecificProperties,
         currentGeoLocation: CurrentGeoLocation,
-        currentOwners?: string[],
+        currentOwners?: ObjectRef[],
         objectState?: string,
         locationHistoryRef?: string[],
         ownerHistoryRef?: string[],
         methodHistoryRef?: string[],
-        linkedObjectRef?: string[],
+        linkedObjectRef?: ObjectRef[],
     ) {
         super({
             identity: identity,

@@ -14,7 +14,12 @@ describe('RalObject', () => {
           "alternateIDs": [],
           "alternateNames": []
         },
-        "currentOwners": [],
+        "currentOwners": [
+          {
+            "UID": "ownerUid",
+            "role": "ownerRole"
+          }
+        ],
         "definition": {
           "definitionText": "An object or entity that is not or cannot be named specifically",
           "definitionURL": "https://www.thefreedictionary.com/thing"
@@ -53,7 +58,12 @@ describe('RalObject', () => {
         "locationHistoryRef": [],
         "ownerHistoryRef": [],
         "methodHistoryRef": [],
-        "linkedObjectRef": []
+        "linkedObjectRef": [
+          {
+            "UID": "linkedObjectUid",
+            "role": "linkedObjectRole"
+          }
+        ]
       }
 
       let ralObject = RalObject.fromMap(data);
@@ -62,6 +72,15 @@ describe('RalObject', () => {
 
       expect(ralObject.identity.uid).to.equal("myUID", "identity.UID");
       expect(ralObject.template.ralType).to.equal("thing", "template.RALType");
+
+      console.log(ralObject.currentOwners);
+
+      expect(ralObject.currentOwners.length).to.equal(1, "currentOwners length");
+      expect(ralObject.currentOwners[0].uid).to.equal("ownerUid", "currentOwners[0].uid");
+
+      expect(ralObject.linkedObjectRef).to.be.lengthOf(1, "linkedObjectRef length");
+      expect(ralObject.linkedObjectRef[0].uid).to.equal("linkedObjectUid", "linkedObjectRef[0].uid");
+
     });
 
     it('should return a RalObject with default values', () => {

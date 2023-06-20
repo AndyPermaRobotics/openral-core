@@ -1,3 +1,4 @@
+import { ObjectRef } from "model/object_ref";
 import { CurrentGeoLocation } from "./current_geo_location";
 import { Definition } from "./definition";
 import { Identity } from "./identity";
@@ -10,7 +11,7 @@ export { CurrentGeoLocation, Definition, Identity, SpecificProperties, Template,
 
 export class RalObject {
     public identity: Identity;
-    public currentOwners: string[];
+    public currentOwners: ObjectRef[];
     public definition: Definition;
     public objectState: string;
     public template: Template;
@@ -19,22 +20,22 @@ export class RalObject {
     public locationHistoryRef: string[];
     public ownerHistoryRef: string[];
     public methodHistoryRef: string[];
-    public linkedObjectRef: string[];
+    public linkedObjectRef: ObjectRef[];
 
     constructor(
         params: {
-        identity: Identity,
-        definition: Definition,
-        template: Template,
-        specificProperties: SpecificProperties,
-        currentGeoLocation: CurrentGeoLocation,
-        currentOwners?: string[],
-        objectState?: string,
-        locationHistoryRef?: string[],
-        ownerHistoryRef?: string[],
-        methodHistoryRef?: string[],
-        linkedObjectRef?: string[],
-    }
+            identity: Identity,
+            definition: Definition,
+            template: Template,
+            specificProperties: SpecificProperties,
+            currentGeoLocation: CurrentGeoLocation,
+            currentOwners?: ObjectRef[],
+            objectState?: string,
+            locationHistoryRef?: string[],
+            ownerHistoryRef?: string[],
+            methodHistoryRef?: string[],
+            linkedObjectRef?: ObjectRef[],
+        }
     ) {
         this.identity = params.identity;
         this.currentOwners = params.currentOwners || [];
@@ -68,7 +69,7 @@ export class RalObject {
     toMap(): Record<string, any> {
         return {
             identity: this.identity.toMap(),
-            currentOwners: this.currentOwners,
+            currentOwners: this.currentOwners.map(val => val.toMap()),
             definition: this.definition.toMap(),
             objectState: this.objectState,
             template: this.template.toMap(),
@@ -77,13 +78,13 @@ export class RalObject {
             locationHistoryRef: this.locationHistoryRef,
             ownerHistoryRef: this.ownerHistoryRef,
             methodHistoryRef: this.methodHistoryRef,
-            linkedObjectRef: this.linkedObjectRef,
+            linkedObjectRef: this.linkedObjectRef.map(val => val.toMap()),
         };
     }
 
     static fromMap(map: Record<string, any>): RalObject {
         const identity: Identity = Identity.fromMap(map.identity);
-        const currentOwners: string[] = map.currentOwners || [];
+        const currentOwners: ObjectRef[] = map.currentOwners != null ? map.currentOwners.map((val: any) => { return ObjectRef.fromMap(val) }) : [];
         const definition: Definition = Definition.fromMap(map.definition);
         const objectState: string = map.objectState || "undefined";
         const template: Template = Template.fromMap(map.template);
@@ -92,7 +93,7 @@ export class RalObject {
         const locationHistoryRef: string[] = map.locationHistoryRef || [];
         const ownerHistoryRef: string[] = map.ownerHistoryRef || [];
         const methodHistoryRef: string[] = map.methodHistoryRef || [];
-        const linkedObjectRef: string[] = map.linkedObjectRef || [];
+        const linkedObjectRef: ObjectRef[] = map.linkedObjectRef != null ? map.linkedObjectRef.map((val: any) => { return ObjectRef.fromMap(val) }) : [];
 
         return new RalObject({
             identity: identity,
@@ -107,5 +108,10 @@ export class RalObject {
             methodHistoryRef: methodHistoryRef,
             linkedObjectRef: linkedObjectRef,
         });
+    }
+
+    //simple to string method
+    toString(): string {
+        return `RalObject(${this.identity.uid}, ${JSON.stringify(this)})`
     }
 }

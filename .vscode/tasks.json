@@ -35,6 +35,12 @@
         },
         {
             "type": "shell",
+            "label": "Typescript: Run tests",
+            "command": "cd typescript && npm run test",
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
             "label": "Python: Build and upload package to test.pypi.org",
             "command": "cd python && python3 setup.py sdist bdist_wheel && twine upload --repository testpypi dist/*",
             "problemMatcher": [],
