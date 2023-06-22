@@ -21,7 +21,7 @@ void main() {
           expect(
             map,
             equals({
-              "ralType": "ralType",
+              "RALType": "ralType",
               "version": "version",
               "objectStateTemplates": "objectStateTemplates",
             }),

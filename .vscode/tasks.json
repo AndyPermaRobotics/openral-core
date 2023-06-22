@@ -24,7 +24,13 @@
         {
             "type": "shell",
             "label": "Flutter: Run tests of file",
-            "command": "cd flutter/openral_core && flutter test ${file}",
+            "command": "cd dart && flutter test ${file}",
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "label": "Flutter: Run all tests",
+            "command": "cd dart && flutter test",
             "problemMatcher": []
         },
         {

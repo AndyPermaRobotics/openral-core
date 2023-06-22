@@ -23,7 +23,7 @@ void main() {
             map,
             equals({
               "container": {
-                "uid": "uid1",
+                "UID": "uid1",
               },
             }),
           );

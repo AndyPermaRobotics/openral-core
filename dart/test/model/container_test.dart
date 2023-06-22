@@ -19,7 +19,7 @@ void main() {
           expect(
             map,
             equals({
-              "uid": "uid1",
+              "UID": "uid1",
             }),
           );
         });
