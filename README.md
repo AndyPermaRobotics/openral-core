@@ -12,6 +12,6 @@ Look at our other repositories for more specific packages and concrete implement
 
 * Javascript/Typescript: [@openral/core](https://www.npmjs.com/package/@openral/core)
 * Python: [openral-py](https://pypi.org/project/openral-py/)
-* Flutter: [openral_flutter](https://github.com/AndyPermaRobotics/openral-core) (not yet published on pub.dev)
+* Flutter: [openral_core](https://github.com/AndyPermaRobotics/openral-core) (not yet published on pub.dev)
 
 

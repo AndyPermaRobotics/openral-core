@@ -1,0 +1,15 @@
+name: openral_core
+description: Core package to work with the openRAL
+version: 1.0.0
+repository: https://github.com/AndyPermaRobotics/openral-core
+homepage: https://open-ral.io
+
+environment:
+  sdk: '>=2.19.6 <3.0.0'
+
+dependencies:
+  either_dart: ^0.4.0
+
+dev_dependencies:
+  lints: ^2.0.0
+  test: ^1.22.0
