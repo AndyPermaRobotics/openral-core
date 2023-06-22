@@ -10,7 +10,7 @@ class ParsableFieldDynamic extends ParsableField<dynamic> {
   }) : super(key);
 
   @override
-  Either<String, ParsingError> parseInner(dynamic value) {
+  Either<dynamic, ParsingError> parseInner(dynamic value) {
     ///no checks necessary here.
     ///The value is already dynamic and can be anything.
     ///'required' condition is checked by the [ParsableField] class
