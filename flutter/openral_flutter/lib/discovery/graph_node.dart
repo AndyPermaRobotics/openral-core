@@ -70,21 +70,37 @@ class GraphNode {
     // }
   }
 
-  List<GraphNode> getDescendants(DiscoveryDimension dimension) {
-    // we have to pay attention here, that we don't run into an infinite loop
-    throw UnimplementedError();
+  // List<GraphNode> getDescendants(DiscoveryDimension dimension) {
+  //   // we have to pay attention here, that we don't run into an infinite loop
+  //   throw UnimplementedError();
 
-    // List<GraphNode> descendants = [];
-    // for (GraphNode child in _children) {
-    //   descendants.add(child);
-    //   descendants.addAll(child.getDescendants());
-    // }
-    // return descendants;
-  }
+  //   // List<GraphNode> descendants = [];
+  //   // for (GraphNode child in _children) {
+  //   //   descendants.add(child);
+  //   //   descendants.addAll(child.getDescendants());
+  //   // }
+  //   // return descendants;
+  // }
 
   @override
   String toString() {
     return 'GraphNode(uid=${data.identity.uid})';
+  }
+
+  String toTreeString({
+    int depth = 0,
+  }) {
+    String result = '';
+    for (int i = 0; i < depth; i++) {
+      result += '  ';
+    }
+    result += data.identity.uid;
+
+    result += '\n';
+    for (GraphNode child in allChildren()) {
+      result += child.toTreeString(depth: depth + 1);
+    }
+    return result;
   }
 
   GraphNode? getChildWithUid(

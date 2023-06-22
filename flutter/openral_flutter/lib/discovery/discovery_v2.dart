@@ -3,6 +3,10 @@ import 'package:openral_flutter/discovery/graph_node.dart';
 import 'package:openral_flutter/model/ral_object.dart';
 import 'package:openral_flutter/repository/ral_object_repository.dart';
 
+///The Discovery Algorithm is used to find all RalObjects that are connected to a given RalObject.
+///It starts with an upstream discovery to find the root node of the discovery tree.
+///Then it loads the dependencies for every node in the tree recursively by using the given discovery dimensions.
+///The result is the root [GraphNode] of the discovery tree with all its dependencies in the different dimensions.
 class DiscoveryV2 {
   /// The RAL repository to search for objects.
   final RalObjectRepository ralRepository;
