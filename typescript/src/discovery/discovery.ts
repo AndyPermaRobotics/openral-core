@@ -4,7 +4,7 @@ import { DiscoveryDimension } from "./discovery_dimension";
 import { GraphNode } from "./graph_node";
 
 
-export class DiscoveryV2 {
+export class Discovery {
     private primaryDiscoveryDimension: DiscoveryDimension;
     private discoveryDimensions: DiscoveryDimension[];
     private ralRepository: RalObjectRepository;

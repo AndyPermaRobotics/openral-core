@@ -1,8 +1,8 @@
 /// Core library for OpenRAL
 library openral_core;
 
+export 'src/discovery/discovery.dart';
 export 'src/discovery/discovery_dimension.dart';
-export 'src/discovery/discovery_v2.dart';
 export 'src/discovery/graph_node.dart';
 export 'src/model/container.dart';
 export 'src/model/current_geo_location.dart';

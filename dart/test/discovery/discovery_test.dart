@@ -1,10 +1,10 @@
+import 'package:openral_core/src/discovery/discovery.dart';
 import 'package:openral_core/src/discovery/discovery_dimension.dart';
-import 'package:openral_core/src/discovery/discovery_v2.dart';
 import 'package:openral_core/src/discovery/graph_node.dart';
 import 'package:openral_core/src/repository/ral_object_repository.dart';
 import 'package:test/test.dart';
 
-import 'mock_data_discovery_v2.dart';
+import 'mock_data_discovery.dart';
 
 void main() {
   group('DiscoveryV2', () {
@@ -29,7 +29,7 @@ void main() {
     test('returns a GraphNode with all exected relationships', () async {
       RalObjectRepository ralRepository = MockDataDiscoveryV2.getMockRalRepository();
 
-      DiscoveryV2 discovery = DiscoveryV2(
+      Discovery discovery = Discovery(
         ralRepository: ralRepository,
         startObject: await ralRepository.getByUid("Start"),
         rootNodeRalType: "wurzel_type",

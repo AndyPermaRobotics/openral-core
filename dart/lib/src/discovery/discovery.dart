@@ -7,7 +7,7 @@ import 'package:openral_core/src/repository/ral_object_repository.dart';
 ///It starts with an upstream discovery to find the root node of the discovery tree.
 ///Then it loads the dependencies for every node in the tree recursively by using the given discovery dimensions.
 ///The result is the root [GraphNode] of the discovery tree with all its dependencies in the different dimensions.
-class DiscoveryV2 {
+class Discovery {
   /// The RAL repository to search for objects.
   final RalObjectRepository ralRepository;
 
@@ -27,7 +27,7 @@ class DiscoveryV2 {
   ///used to store the already loaded objects to avoid loading them twice
   final Map<String, GraphNode> _objectRegistry = {};
 
-  DiscoveryV2({
+  Discovery({
     required this.ralRepository,
     required this.startObject,
     required this.rootNodeRalType,
