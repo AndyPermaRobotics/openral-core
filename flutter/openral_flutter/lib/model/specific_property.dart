@@ -1,6 +1,6 @@
 class SpecificProperty {
   final String key;
-  final String value;
+  final dynamic value;
   final String? unit;
 
   SpecificProperty({

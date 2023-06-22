@@ -1,4 +1,5 @@
 import 'package:openral_flutter/cross/backend/parsing/parseable_field.dart';
+import 'package:openral_flutter/cross/backend/parsing/parseable_field_dynamic.dart';
 import 'package:openral_flutter/cross/backend/parsing/parseable_field_string.dart';
 import 'package:openral_flutter/cross/backend/parsing/parser_factory.dart';
 import 'package:openral_flutter/model/specific_property.dart';
@@ -9,7 +10,7 @@ class SpecificPropertyParser extends ParserFactory<SpecificProperty> {
     isRequired: true,
   );
 
-  ParsableFieldString VALUE_FIELD = const ParsableFieldString(
+  ParsableFieldDynamic VALUE_FIELD = const ParsableFieldDynamic(
     "value",
     isRequired: true,
   );
@@ -23,7 +24,7 @@ class SpecificPropertyParser extends ParserFactory<SpecificProperty> {
   SpecificProperty create(Map<ParsableField, dynamic> parsedValues) {
     return SpecificProperty(
       key: parsedValues[KEY_FIELD] as String,
-      value: parsedValues[VALUE_FIELD] as String,
+      value: parsedValues[VALUE_FIELD],
       unit: parsedValues[UNIT_FIELD] as String?,
     );
   }
