@@ -36,7 +36,7 @@ void main() {
               "template": {
                 "RALType": "thing",
                 "version": "1",
-                "objectStateTemplates": "generalObjectState",
+                "objectStateTemplates": ["generalObjectState"],
               },
               "specificProperties": [
                 {
@@ -93,7 +93,7 @@ void main() {
 
             expect(ralObject.template.ralType, equals("thing"));
             expect(ralObject.template.version, equals("1"));
-            expect(ralObject.template.objectStateTemplates, equals("generalObjectState"));
+            expect(ralObject.template.objectStateTemplates, equals(["generalObjectState"]));
 
             expect(
               ralObject.specificProperties.containsKey("serial number"),
@@ -194,7 +194,7 @@ void main() {
               "template": {
                 "RALType": "ralType1",
                 "version": "version1",
-                "objectStateTemplates": "objectStateTemplates1",
+                "objectStateTemplates": ["objectStateTemplates1"],
               },
               "specificProperties": [
                 {

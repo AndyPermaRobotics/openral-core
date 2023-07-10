@@ -18,7 +18,7 @@ class MockDataDiscoveryV2 {
       "template": {
         "RALType": "wurzel_type",
         "version": "1",
-        "objectStateTemplates": "",
+        "objectStateTemplates": [""],
       },
       "specificProperties": [],
       "currentGeolocation": {},
@@ -47,7 +47,7 @@ class MockDataDiscoveryV2 {
       "template": {
         "RALType": "",
         "version": "1",
-        "objectStateTemplates": "",
+        "objectStateTemplates": [""],
       },
       "specificProperties": [],
       "currentGeolocation": {
@@ -80,7 +80,7 @@ class MockDataDiscoveryV2 {
       "template": {
         "RALType": "",
         "version": "1",
-        "objectStateTemplates": "",
+        "objectStateTemplates": [""],
       },
       "specificProperties": [],
       "currentGeolocation": {
@@ -108,7 +108,7 @@ class MockDataDiscoveryV2 {
       "template": {
         "RALType": "",
         "version": "1",
-        "objectStateTemplates": "",
+        "objectStateTemplates": [""],
       },
       "specificProperties": [],
       "currentGeolocation": {
@@ -136,7 +136,7 @@ class MockDataDiscoveryV2 {
       "template": {
         "RALType": "",
         "version": "1",
-        "objectStateTemplates": "",
+        "objectStateTemplates": [""],
       },
       "specificProperties": [],
       "currentGeolocation": {
@@ -164,7 +164,7 @@ class MockDataDiscoveryV2 {
       "template": {
         "RALType": "",
         "version": "1",
-        "objectStateTemplates": "",
+        "objectStateTemplates": [""],
       },
       "specificProperties": [],
       "currentGeolocation": {
@@ -201,7 +201,7 @@ class MockDataDiscoveryV2 {
       "template": {
         "RALType": "",
         "version": "1",
-        "objectStateTemplatesym   ": "",
+        "objectStateTemplates": [""],
       },
       "specificProperties": [],
       "currentGeolocation": {},
@@ -234,7 +234,7 @@ class MockDataDiscoveryV2 {
       "template": {
         "RALType": "",
         "version": "1",
-        "objectStateTemplates": "",
+        "objectStateTemplates": [""],
       },
       "specificProperties": [],
       "currentGeolocation": {},

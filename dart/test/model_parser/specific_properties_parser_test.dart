@@ -36,7 +36,7 @@ void main() {
 
         final result = parser.parse([
           {"key": "key1", "value": "value1", "unit": "String"},
-          {"key": "key2", "unit": "int"} //value is missing here
+          {"unit": "int"} //key is missing here
         ]);
 
         expect(result.isRight, isTrue, reason: "Expected to get Either.right, but got Left(${result.isLeft ? result.left : null})");
