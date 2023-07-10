@@ -14,7 +14,7 @@ class TemplateParser extends ParserFactory<Template> {
     isRequired: true,
   );
 
-  ParsableListField OBJECT_STATE_TEMPLATES_FIELD = ParsableListField(
+  ParsableListField<String> OBJECT_STATE_TEMPLATES_FIELD = ParsableListField<String>(
     "objectStateTemplates",
     isRequired: false,
     singleField: ParsableFieldString(""),
