@@ -41,6 +41,12 @@
         },
         {
             "type": "shell",
+            "label": "Python: Run tests",
+            "command": "cd python && python3 -m pytest",
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
             "label": "Typescript: Run tests",
             "command": "cd typescript && npm run test",
             "problemMatcher": []

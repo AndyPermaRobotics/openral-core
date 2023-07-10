@@ -1,8 +1,8 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List
 
 
 class Template:
-    def __init__(self, ral_type: str, version: str, object_state_templates: Optional[str] = None):
+    def __init__(self, ral_type: str, version: str, object_state_templates: List[str] = []):
         self.ral_type = ral_type
         self.version = version
         self.object_state_templates = object_state_templates
@@ -18,5 +18,5 @@ class Template:
     def from_map(template_map: Dict[str, Any]) -> 'Template':
         ral_type = template_map['RALType']
         version = template_map['version']
-        object_state_templates = template_map.get('objectStateTemplates')
+        object_state_templates = template_map.get('objectStateTemplates', [])
         return Template(ral_type, version, object_state_templates)

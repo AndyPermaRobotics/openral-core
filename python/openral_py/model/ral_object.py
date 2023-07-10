@@ -31,7 +31,7 @@ class RalObject:
         "template": {
             "RALType": "thing",
             "version": "1",
-            "objectStateTemplates": "generalObjectState"
+            "objectStateTemplates": ["generalObjectState"]
         },
         "specificProperties": [
             {

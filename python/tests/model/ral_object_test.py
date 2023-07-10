@@ -29,7 +29,7 @@ class TestRalObject:
             "template": {
                 "RALType": "thing",
                 "version": "1",
-                "objectStateTemplates": "generalObjectState"
+                "objectStateTemplates": ["generalObjectState"]
             },
             "specificProperties": [
                 {
@@ -93,7 +93,7 @@ class TestRalObject:
 
         assert ral_object.template.ral_type == "thing"
         assert ral_object.template.version == "1"
-        assert ral_object.template.object_state_templates == "generalObjectState"
+        assert ral_object.template.object_state_templates == ["generalObjectState"]
 
 
         specific_properties = ral_object.specific_properties.get("serial number")
@@ -140,7 +140,7 @@ class TestRalObject:
             "template": {
                 "RALType": "thing",
                 "version": "1",
-                "objectStateTemplates": "generalObjectState"
+                "objectStateTemplates": ["generalObjectState"]
             },
             "specificProperties": [],
             "currentGeolocation": {
@@ -181,7 +181,7 @@ class TestRalObject:
 
         assert ral_object.template.ral_type == "thing"
         assert ral_object.template.version == "1"
-        assert ral_object.template.object_state_templates == "generalObjectState"
+        assert ral_object.template.object_state_templates == ["generalObjectState"]
 
 
         assert len(ral_object.specific_properties.map) == 0, "specific_properties is empty"

@@ -1,5 +1,5 @@
 
-from openral_py.repository import MockRalRepository, RalRepository
+from openral_py.repository import MockRalObjectRepository, RalObjectRepository
 
 
 class MockDataRemote: 
@@ -29,7 +29,7 @@ class MockDataRemote:
         "template": {
             "RALType": "farm",
             "version": "1",
-            "objectStateTemplates": "",
+            "objectStateTemplates": [""],
         },
         "specificProperties": [
             {"key": "lastUpdateTimestamp", "value": "value", "unit": "timestamp"},
@@ -58,7 +58,7 @@ class MockDataRemote:
         "template": {
             "RALType": "pc_instance",
             "version": "1",
-            "objectStateTemplates": "",
+            "objectStateTemplates": [""],
         },
         "specificProperties": [
             {"key": "lastUpdateTimestamp", "value": "value", "unit": "timestamp"},
@@ -84,7 +84,11 @@ class MockDataRemote:
             "definitionURL": "",
         },
         "objectState": "undefined",
-        "template": {"RALType": "mqtt_broker_service", "version": "1", "objectStateTemplates": ""},
+        "template": {
+            "RALType": "mqtt_broker_service", 
+            "version": "1", 
+            "objectStateTemplates": [""],
+        },
         "specificProperties": [
             {"key": "lastUpdateTimestamp", "value": "value", "unit": "timestamp"},
             {"key": "ipAddress", "value": "[add IP address here]", "unit": "string"},
@@ -109,7 +113,11 @@ class MockDataRemote:
             "definitionURL": "",
         },
         "objectState": "undefined",
-        "template": {"RALType": "xyz", "version": "1", "objectStateTemplates": ""},
+        "template": {
+            "RALType": "xyz",
+            "version": "1", 
+            "objectStateTemplates": [""]
+        },
         "specificProperties": [],
         "currentGeolocation": {
             "container": {"UID": "mqtt_id"} #is a child of the MQTT Broker
@@ -133,7 +141,11 @@ class MockDataRemote:
             "definitionURL": "",
         },
         "objectState": "undefined",
-        "template": {"RALType": "firebaseConnector", "version": "1", "objectStateTemplates": ""},
+        "template": {
+            "RALType": "firebaseConnector", 
+            "version": "1", 
+            "objectStateTemplates": [""]
+        },
         "specificProperties": [
             {"key": "appId", "value": "myAppId", "unit": "String"},
             {"key": "apiKey", "value": "myApiKey", "unit": "String"},
@@ -160,8 +172,8 @@ class MockDataRemote:
     }
 
     @staticmethod
-    def getMockRalRepository() -> RalRepository:
-        return MockRalRepository(
+    def getMockRalRepository() -> RalObjectRepository:
+        return MockRalObjectRepository(
             docs_by_uid= MockDataRemote.docs_by_uid,
             docs_by_container_id= MockDataRemote.docs_by_container_id,
         )
@@ -193,7 +205,7 @@ class MockDataLocal:
         "template": {
             "RALType": "pc_instance",
             "version": "1",
-            "objectStateTemplates": "",
+            "objectStateTemplates": [""],
         },
         "specificProperties": [
             {"key": "lastUpdateTimestamp", "value": "value", "unit": "timestamp"},
@@ -219,7 +231,11 @@ class MockDataLocal:
             "definitionURL": "",
         },
         "objectState": "undefined",
-        "template": {"RALType": "mqtt_broker_service", "version": "1", "objectStateTemplates": ""},
+        "template": {
+            "RALType": "mqtt_broker_service", 
+            "version": "1", 
+            "objectStateTemplates": [""]
+        },
         "specificProperties": [
             {"key": "lastUpdateTimestamp", "value": "value", "unit": "timestamp"},
             {"key": "ipAddress", "value": "[add IP address here]", "unit": "string"},
@@ -244,7 +260,11 @@ class MockDataLocal:
             "definitionURL": "",
         },
         "objectState": "undefined",
-        "template": {"RALType": "xyz", "version": "1", "objectStateTemplates": ""},
+        "template": {
+            "RALType": "xyz", 
+            "version": "1", 
+            "objectStateTemplates": [""]
+        },
         "specificProperties": [],
         "currentGeolocation": {
             "container": {"UID": "mqtt_id"} #is a child of the MQTT Broker
@@ -268,7 +288,11 @@ class MockDataLocal:
             "definitionURL": "",
         },
         "objectState": "undefined",
-        "template": {"RALType": "firebaseConnector", "version": "1", "objectStateTemplates": ""},
+        "template": {
+            "RALType": "firebaseConnector", 
+            "version": "1", 
+            "objectStateTemplates": [""]
+        },
         "specificProperties": [
             {"key": "appId", "value": "myAppId", "unit": "String"},
             {"key": "apiKey", "value": "myApiKey", "unit": "String"},
@@ -295,8 +319,8 @@ class MockDataLocal:
     }
 
     @staticmethod
-    def  getMockRalRepository() -> RalRepository: 
-        return MockRalRepository(
+    def  getMockRalRepository() -> RalObjectRepository: 
+        return MockRalObjectRepository(
             docs_by_uid = MockDataLocal.docs_by_uid,
             docs_by_container_id = MockDataLocal.docs_by_container_id,
         )

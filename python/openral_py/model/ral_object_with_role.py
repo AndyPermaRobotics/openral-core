@@ -4,7 +4,6 @@ from openral_py.model.current_geo_location import CurrentGeoLocation
 from openral_py.model.definition import Definition
 from openral_py.model.identity import Identity
 from openral_py.model.object_ref import ObjectRef
-from openral_py.model.owner_ref import OwnerRef
 from openral_py.model.ral_object import RalObject
 from openral_py.model.specific_properties import SpecificProperties
 from openral_py.model.specific_property import SpecificProperty
@@ -23,10 +22,10 @@ class RalObjectWithRole(RalObject):
         template: Template,
         specific_properties: SpecificProperties,
         current_geo_location: CurrentGeoLocation,
-        current_owners: list[OwnerRef] = [],
+        current_owners: list[ObjectRef] = [],
         object_state: str =  "undefined",
         location_history_ref: list[str] = [],
-        owner_history_ref: list[OwnerRef] = [],
+        owner_history_ref: list[ObjectRef] = [],
         method_history_ref: list[str] = [],
         linked_object_ref: list[ObjectRef] = [],
     ) -> None:

@@ -5,8 +5,7 @@ from ast import Dict
 from typing import Any
 
 import pytest
-
-from openral_py.repository import MockRalRepository
+from openral_py.repository import MockRalObjectRepository
 
 
 class TestMockRalRepository:
@@ -28,7 +27,7 @@ class TestMockRalRepository:
                 "template": {
                     "RALType": "pc_instance",
                     "version": "1",
-                    "objectStateTemplates": "",
+                    "objectStateTemplates": [""],
                 },
                 "specificProperties": [
                     {"key": "lastUpdateTimestamp", "value": "value", "unit": "timestamp"},
@@ -58,8 +57,8 @@ class TestMockRalRepository:
             docs_by_container_id: dict[str, list[str]],
         ):
         
-        repository = MockRalRepository(docs_by_uid, docs_by_container_id)
-        ral_object = await repository.get_ral_object_by_uid("myUid")
+        repository = MockRalObjectRepository(docs_by_uid, docs_by_container_id)
+        ral_object = await repository.get_by_uid("myUid")
         
         assert ral_object.identity.uid == "myUid", "Expected uid to be 'myUid'"
         
@@ -70,10 +69,10 @@ class TestMockRalRepository:
             docs_by_container_id: dict[str, list[str]],
         ):
         
-        repository = MockRalRepository(docs_by_uid, docs_by_container_id)
+        repository = MockRalObjectRepository(docs_by_uid, docs_by_container_id)
         
         with pytest.raises(Exception) as e:
-            await repository.get_ral_object_by_uid("unknownUid")
+            await repository.get_by_uid("unknownUid")
         
         assert str(e.value) == "No RalObject found for uid 'unknownUid'"
 
@@ -84,9 +83,9 @@ class TestMockRalRepository:
         docs_by_container_id: dict[str, list[str]],
     ):
             
-        repository = MockRalRepository(docs_by_uid, docs_by_container_id)
+        repository = MockRalObjectRepository(docs_by_uid, docs_by_container_id)
 
-        ral_objects = await repository.get_ral_objects_with_container_id("container1")
+        ral_objects = await repository.get_by_container_id("container1")
 
         assert len(ral_objects) == 1, "Expected exactly one RalObject"
         assert ral_objects[0].identity.uid == "myUid", "Expected uid to be 'myUid'"
@@ -98,9 +97,9 @@ class TestMockRalRepository:
         docs_by_uid: dict[str, Any],
         docs_by_container_id: dict[str, list[str]],):
 
-        repository = MockRalRepository(docs_by_uid, docs_by_container_id)
+        repository = MockRalObjectRepository(docs_by_uid, docs_by_container_id)
 
-        ral_objects = await repository.get_ral_objects_by_ral_type("pc_instance")
+        ral_objects = await repository.get_by_ral_type("pc_instance")
 
         assert len(ral_objects) == 1, "Expected exactly one RalObject"
         assert ral_objects[0].identity.uid == "myUid", "Expected uid to be 'myUid'"
