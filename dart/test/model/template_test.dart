@@ -11,7 +11,7 @@ void main() {
           final template = Template(
             ralType: "ralType",
             version: "version",
-            objectStateTemplates: "objectStateTemplates",
+            objectStateTemplates: ["objectStateTemplates"],
           );
 
           //act
@@ -23,7 +23,7 @@ void main() {
             equals({
               "RALType": "ralType",
               "version": "version",
-              "objectStateTemplates": "objectStateTemplates",
+              "objectStateTemplates": ["objectStateTemplates"],
             }),
           );
         });

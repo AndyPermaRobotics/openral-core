@@ -1,5 +1,6 @@
 import 'package:openral_core/src/cross/backend/parsing/parseable_field.dart';
 import 'package:openral_core/src/cross/backend/parsing/parseable_field_string.dart';
+import 'package:openral_core/src/cross/backend/parsing/parseable_list_field.dart';
 import 'package:openral_core/src/cross/backend/parsing/parser_factory.dart';
 import 'package:openral_core/src/model/template.dart';
 
@@ -12,9 +13,11 @@ class TemplateParser extends ParserFactory<Template> {
     "version",
     isRequired: true,
   );
-  ParsableFieldString OBJECT_STATE_TEMPLATES_FIELD = const ParsableFieldString(
+
+  ParsableListField OBJECT_STATE_TEMPLATES_FIELD = ParsableListField(
     "objectStateTemplates",
     isRequired: false,
+    singleField: ParsableFieldString(""),
   );
 
   @override
@@ -22,7 +25,7 @@ class TemplateParser extends ParserFactory<Template> {
     return Template(
       ralType: parsedValues[RAL_TYPE_FIELD] as String,
       version: parsedValues[VERSION_FIELD] as String,
-      objectStateTemplates: parsedValues[OBJECT_STATE_TEMPLATES_FIELD] as String?,
+      objectStateTemplates: parsedValues[OBJECT_STATE_TEMPLATES_FIELD] as List<String>? ?? [],
     );
   }
 

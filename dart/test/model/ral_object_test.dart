@@ -139,7 +139,7 @@ void main() {
             template: Template(
               ralType: "ralType1",
               version: "version1",
-              objectStateTemplates: "objectStateTemplates1",
+              objectStateTemplates: ["objectStateTemplates1"],
             ),
             specificProperties: SpecificProperties({
               "key1": SpecificProperty(

@@ -28,7 +28,7 @@ import 'package:openral_core/src/model_parser/ral_object_parser.dart';
 ///   "template": {
 ///     "RALType": "thing",
 ///     "version": "1",
-///     "objectStateTemplates": "generalObjectState"
+///     "objectStateTemplates": ["generalObjectState"]
 ///   },
 ///   "specificProperties": [
 ///     {

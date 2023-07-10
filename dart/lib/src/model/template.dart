@@ -5,12 +5,12 @@ import 'package:openral_core/src/model_parser/template_parser.dart';
 class Template {
   final String ralType;
   final String version;
-  final String? objectStateTemplates;
+  final List<String> objectStateTemplates;
 
   Template({
     required this.ralType,
     required this.version,
-    this.objectStateTemplates,
+    this.objectStateTemplates = const [],
   });
 
   Map<String, dynamic> toMap() {

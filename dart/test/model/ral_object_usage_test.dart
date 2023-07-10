@@ -36,7 +36,7 @@ void main() {
         template: Template(
           ralType: "",
           version: "",
-          objectStateTemplates: "",
+          objectStateTemplates: [""],
         ),
       );
 
@@ -68,7 +68,7 @@ void main() {
         template: Template(
           ralType: "",
           version: "",
-          objectStateTemplates: "",
+          objectStateTemplates: [""],
         ),
       );
 
