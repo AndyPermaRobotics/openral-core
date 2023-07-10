@@ -12,7 +12,7 @@ class SpecificPropertyParser extends ParserFactory<SpecificProperty> {
 
   ParsableFieldDynamic VALUE_FIELD = const ParsableFieldDynamic(
     "value",
-    isRequired: true,
+    isRequired: false,
   );
 
   ParsableFieldString UNIT_FIELD = const ParsableFieldString(
