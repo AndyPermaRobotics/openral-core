@@ -1,28 +1,28 @@
 import 'package:either_dart/either.dart';
 import 'package:openral_core/src/cross/backend/parsing/parsing_error.dart';
-import 'package:openral_core/src/model_parser/template_parser.dart';
+import 'package:openral_core/src/model_parser/method_template_parser.dart';
 
-class Template {
+class MethodTemplate {
   final String ralType;
   final String version;
-  final List<String> objectStateTemplates;
+  final List<String> methodStateTemplates;
 
-  Template({
+  MethodTemplate({
     required this.ralType,
     required this.version,
-    this.objectStateTemplates = const [],
+    this.methodStateTemplates = const [],
   });
 
   Map<String, dynamic> toMap() {
     return {
       'RALType': ralType,
       'version': version,
-      'objectStateTemplates': objectStateTemplates,
+      'methodStateTemplates': methodStateTemplates,
     };
   }
 
-  static Either<Template, ParsingError> fromMap(map) {
-    final templateParser = TemplateParser();
+  static Either<MethodTemplate, ParsingError> fromMap(map) {
+    final templateParser = MethodTemplateParser();
 
     return templateParser.fromMap(map);
   }

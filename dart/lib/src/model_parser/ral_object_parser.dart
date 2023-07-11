@@ -8,15 +8,15 @@ import 'package:openral_core/src/model/current_geo_location.dart';
 import 'package:openral_core/src/model/definition.dart';
 import 'package:openral_core/src/model/identity.dart';
 import 'package:openral_core/src/model/object_ref.dart';
+import 'package:openral_core/src/model/object_template.dart';
 import 'package:openral_core/src/model/ral_object.dart';
 import 'package:openral_core/src/model/specific_properties.dart';
-import 'package:openral_core/src/model/template.dart';
 import 'package:openral_core/src/model_parser/definition_parser.dart';
 import 'package:openral_core/src/model_parser/geo_location_parser.dart';
 import 'package:openral_core/src/model_parser/identity_parser.dart';
 import 'package:openral_core/src/model_parser/object_ref_parser.dart';
+import 'package:openral_core/src/model_parser/object_template_parser.dart';
 import 'package:openral_core/src/model_parser/specific_properties_parser.dart';
-import 'package:openral_core/src/model_parser/template_parser.dart';
 
 class RalObjectParser<S extends SpecificProperties> extends ParserFactory<RalObject<S>> {
   final ParsableFieldNested<Identity> IDENTITY_FIELD = ParsableFieldNested(
@@ -48,10 +48,10 @@ class RalObjectParser<S extends SpecificProperties> extends ParserFactory<RalObj
     defaultValue: "undefined",
   );
 
-  final ParsableFieldNested<Template> TEMPLATE_FIELD = ParsableFieldNested(
+  final ParsableFieldNested<ObjectTemplate> TEMPLATE_FIELD = ParsableFieldNested(
     "template",
     isRequired: true,
-    parserFactory: TemplateParser(),
+    parserFactory: ObjectTemplateParser(),
   );
 
   final ParsableFieldCustomSimple<SpecificProperties> SPECIFIC_PROPERTIES_FIELD = SpecificPropertiesParser();

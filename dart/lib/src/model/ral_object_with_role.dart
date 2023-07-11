@@ -2,9 +2,9 @@ import 'package:openral_core/src/model/current_geo_location.dart';
 import 'package:openral_core/src/model/definition.dart';
 import 'package:openral_core/src/model/identity.dart';
 import 'package:openral_core/src/model/object_ref.dart';
+import 'package:openral_core/src/model/object_template.dart';
 import 'package:openral_core/src/model/ral_object.dart';
 import 'package:openral_core/src/model/specific_properties.dart';
-import 'package:openral_core/src/model/template.dart';
 
 class RalObjectWithRole extends RalObject {
   final String role;
@@ -13,7 +13,7 @@ class RalObjectWithRole extends RalObject {
     required this.role,
     required Identity identity,
     required Definition definition,
-    required Template template,
+    required ObjectTemplate template,
     required SpecificProperties specificProperties,
     required CurrentGeoLocation currentGeolocation,
     List<ObjectRef> currentOwners = const [],

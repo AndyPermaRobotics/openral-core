@@ -1,9 +1,9 @@
 import 'package:openral_core/src/model/definition.dart';
 import 'package:openral_core/src/model/identity.dart';
+import 'package:openral_core/src/model/object_template.dart';
 import 'package:openral_core/src/model/ral_object.dart';
 import 'package:openral_core/src/model/specific_properties.dart';
 import 'package:openral_core/src/model/specific_property.dart';
-import 'package:openral_core/src/model/template.dart';
 import 'package:test/test.dart';
 
 class MySpecificProperties extends SpecificProperties {
@@ -33,7 +33,7 @@ void main() {
             ),
           },
         ),
-        template: Template(
+        template: ObjectTemplate(
           ralType: "",
           version: "",
           objectStateTemplates: [""],
@@ -65,7 +65,7 @@ void main() {
             ),
           },
         ),
-        template: Template(
+        template: ObjectTemplate(
           ralType: "",
           version: "",
           objectStateTemplates: [""],

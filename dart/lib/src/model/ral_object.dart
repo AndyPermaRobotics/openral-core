@@ -4,8 +4,8 @@ import 'package:openral_core/src/model/current_geo_location.dart';
 import 'package:openral_core/src/model/definition.dart';
 import 'package:openral_core/src/model/identity.dart';
 import 'package:openral_core/src/model/object_ref.dart';
+import 'package:openral_core/src/model/object_template.dart';
 import 'package:openral_core/src/model/specific_properties.dart';
-import 'package:openral_core/src/model/template.dart';
 import 'package:openral_core/src/model_parser/ral_object_parser.dart';
 
 ///represents the base class for RAL objects
@@ -70,7 +70,7 @@ class RalObject<S extends SpecificProperties> {
 
   final String objectState;
 
-  final Template template;
+  final ObjectTemplate template;
 
   final S _specificProperties;
 

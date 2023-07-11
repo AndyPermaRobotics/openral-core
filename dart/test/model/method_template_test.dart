@@ -1,17 +1,17 @@
-import 'package:openral_core/src/model/template.dart';
+import 'package:openral_core/src/model/method_template.dart';
 import 'package:test/test.dart';
 
 void main() {
   group(
-    Template,
+    MethodTemplate,
     () {
       group('toMap', () {
         test('returns map with values', () async {
           //arrange
-          final template = Template(
+          final template = MethodTemplate(
             ralType: "ralType",
             version: "version",
-            objectStateTemplates: ["objectStateTemplates"],
+            methodStateTemplates: ["methodStateTemplates"],
           );
 
           //act
@@ -23,7 +23,7 @@ void main() {
             equals({
               "RALType": "ralType",
               "version": "version",
-              "objectStateTemplates": ["objectStateTemplates"],
+              "methodStateTemplates": ["methodStateTemplates"],
             }),
           );
         });

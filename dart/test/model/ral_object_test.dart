@@ -3,10 +3,10 @@ import 'package:openral_core/src/model/current_geo_location.dart';
 import 'package:openral_core/src/model/definition.dart';
 import 'package:openral_core/src/model/identity.dart';
 import 'package:openral_core/src/model/object_ref.dart';
+import 'package:openral_core/src/model/object_template.dart';
 import 'package:openral_core/src/model/ral_object.dart';
 import 'package:openral_core/src/model/specific_properties.dart';
 import 'package:openral_core/src/model/specific_property.dart';
-import 'package:openral_core/src/model/template.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -136,7 +136,7 @@ void main() {
               definitionURL: "definitionURL1",
             ),
             objectState: "objectState1",
-            template: Template(
+            template: ObjectTemplate(
               ralType: "ralType1",
               version: "version1",
               objectStateTemplates: ["objectStateTemplates1"],

@@ -1,15 +1,15 @@
 import 'package:openral_core/src/model/definition.dart';
 import 'package:openral_core/src/model/identity.dart';
+import 'package:openral_core/src/model/method_template.dart';
 import 'package:openral_core/src/model/object_ref.dart';
 import 'package:openral_core/src/model/ral_object.dart';
 import 'package:openral_core/src/model/ral_object_with_role.dart';
 import 'package:openral_core/src/model/specific_properties.dart';
-import 'package:openral_core/src/model/template.dart';
 
 class RalMethod {
   Identity identity;
   Definition definition;
-  Template template;
+  MethodTemplate template;
   String methodState;
   SpecificProperties specificProperties;
   List<RalObjectWithRole> inputObjects;
@@ -17,6 +17,9 @@ class RalMethod {
   List<RalMethod> nestedMethods;
   List<ObjectRef> inputObjectsRef;
   List<ObjectRef> outputObjectsRef;
+
+  //the executor is required as soon as the method is running
+  RalObject? executor;
 
   RalMethod({
     required this.identity,
@@ -29,6 +32,7 @@ class RalMethod {
     required this.nestedMethods,
     required this.inputObjectsRef,
     required this.outputObjectsRef,
+    required this.executor,
   });
 
   Map<String, dynamic> toMap() {
@@ -43,15 +47,27 @@ class RalMethod {
       "nestedMethods": nestedMethods.map((nestedMethod) => nestedMethod.toMap()).toList(),
       "inputObjectsRef": inputObjectsRef.map((inputObjectRef) => inputObjectRef.toMap()).toList(),
       "outputObjectsRef": outputObjectsRef.map((outputObjectRef) => outputObjectRef.toMap()).toList(),
+      "executor": executor?.toMap(),
     };
   }
 
   static RalMethod fromMap(Map<String, dynamic> map) {
     final identityResult = Identity.fromMap(map["identity"]);
     final definitionResult = Definition.fromMap(map["definition"]);
-    final templateResult = Template.fromMap(map["template"]);
+    final templateResult = MethodTemplate.fromMap(map["template"]);
     final methodState = map.containsKey("methodState") ? map["methodState"] : "undefined";
     final specificPropertiesResult = SpecificProperties.fromMaps(map["specificProperties"]);
+
+    RalObject? executor;
+    if (map["executor"] != null) {
+      final executorResult = RalObject.fromMap(map["executor"]);
+
+      if (executorResult.isRight) {
+        throw Exception("Executor parsing failed: ${executorResult.right}");
+      } else {
+        executor = executorResult.left;
+      }
+    }
 
     if (identityResult.isRight) {
       throw Exception("Identity parsing failed: ${identityResult.right}");
@@ -80,7 +96,7 @@ class RalMethod {
 
     List<RalObject> outputObjects = [];
     if (map.containsKey("outputObjects")) {
-      outputObjects = map["outputObjects"].map<RalObject>((outputObject) => RalObject.fromMap(outputObject)).toList();
+      outputObjects = map["outputObjects"].map<RalObject>((outputObject) => RalObject.fromMap(outputObject).left).toList();
     }
 
     List<RalMethod> nestedMethods = [];
@@ -109,6 +125,7 @@ class RalMethod {
       nestedMethods: nestedMethods,
       inputObjectsRef: inputObjectsRef,
       outputObjectsRef: outputObjectsRef,
+      executor: executor,
     );
   }
 }
