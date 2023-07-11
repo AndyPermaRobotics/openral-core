@@ -28,7 +28,7 @@ describe('RalObject', () => {
         "template": {
           "RALType": "thing",
           "version": "1",
-          "objectStateTemplates": "generalObjectState"
+          "objectStateTemplates": ["generalObjectState"]
         },
         "specificProperties": [
           {
@@ -94,8 +94,7 @@ describe('RalObject', () => {
 
         "template": {
           "RALType": "thing",
-          "version": "1",
-          "objectStateTemplates": "generalObjectState"
+          "version": "1"
         },
         "specificProperties": [],
         "currentGeolocation": {
@@ -122,7 +121,7 @@ describe('RalObject', () => {
       expect(ralObject.objectState).to.equal("undefined", "objectState");
 
       expect(ralObject.template.version).to.equal("1", "template.version");
-      expect(ralObject.template.objectStateTemplates).to.equal("generalObjectState", "template.objectStateTemplates");
+      expect(ralObject.template.objectStateTemplates).to.deep.equal([], "template.objectStateTemplates");
 
       expect(ralObject.specificProperties.toMaps().length).to.deep.equal(0, "specificProperties length");
 

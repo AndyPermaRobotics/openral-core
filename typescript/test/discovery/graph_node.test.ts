@@ -21,7 +21,7 @@ function createExampleRalObject(): RalObject {
         template: new Template(
             "thing",
             "1",
-            "generalObjectState",
+            ["generalObjectState"],
         ),
         specificProperties: new SpecificProperties({}),
         currentGeoLocation: new CurrentGeoLocation(),

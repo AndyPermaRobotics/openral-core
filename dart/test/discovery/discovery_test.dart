@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 import 'mock_data_discovery.dart';
 
 void main() {
-  group('DiscoveryV2', () {
+  group('Discovery', () {
     Future<void> checkRelationship(GraphNode parentNode, List<String> expectedChildren, DiscoveryDimension dimension) async {
       List<String> childrenUids = parentNode.children(dimension).map((value) => value.data.identity.uid).toList();
 

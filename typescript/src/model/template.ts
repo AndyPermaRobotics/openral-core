@@ -4,14 +4,14 @@ export class Template {
     constructor(
         public ralType: string,
         public version: string,
-        public objectStateTemplates: string | null = null,
+        public objectStateTemplates: string[],
     ) { }
 
     toMap(): Record<string, any> {
         return {
             "RALType": this.ralType,
             "version": this.version,
-            "objectStateTemplates": this.objectStateTemplates ?? null,
+            "objectStateTemplates": this.objectStateTemplates,
         };
     }
 
@@ -29,7 +29,7 @@ export class Template {
         return new Template(
             RALType,
             version,
-            objectStateTemplates ?? ""
+            objectStateTemplates ?? []
         );
     }
 }

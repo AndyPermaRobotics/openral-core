@@ -26,7 +26,7 @@ describe('RalObjectWithRole', () => {
                 "template": {
                     "RALType": "thing",
                     "version": "1",
-                    "objectStateTemplates": "generalObjectState"
+                    "objectStateTemplates": ["generalObjectState"]
                 },
                 "specificProperties": [
                     {
@@ -78,7 +78,7 @@ describe('RalObjectWithRole', () => {
             const testObject: RalObject = new RalObject({
                 identity: new Identity("myUID"),
                 definition: new Definition(),
-                template: new Template("ralType", "1.0", null),
+                template: new Template("ralType", "1.0", []),
                 specificProperties: new SpecificProperties({
                     "myProperty": new SpecificProperty("key", "value"),
                 }),

@@ -1,9 +1,9 @@
 import { assert, expect } from 'chai';
 import 'mocha';
+import { Discovery } from '../../src/discovery/discovery';
 import { DiscoveryDimension } from '../../src/discovery/discovery_dimension';
-import { DiscoveryV2 } from '../../src/discovery/discovery_v2';
 import { GraphNode } from '../../src/discovery/graph_node';
-import { MockDataDiscoveryV2 } from './mock_data_discovery_v2';
+import { MockDataDiscovery } from './mock_data_discovery';
 
 
 const eqSet = (xs: Set<string>, ys: Set<string>) =>
@@ -36,12 +36,12 @@ function checkRelationship(parentNode: GraphNode, expectedChildren: string[], di
 
 
 
-describe('Discovery2', () => {
+describe('Discovery', () => {
   describe('.execute', () => {
     it('', async () => {
-      const ralRepository = MockDataDiscoveryV2.getMockRalRepository();
+      const ralRepository = MockDataDiscovery.getMockRalRepository();
 
-      const discovery = new DiscoveryV2(ralRepository, await ralRepository.getByUid("Start"), "wurzel_type", DiscoveryDimension.ContainerId, [
+      const discovery = new Discovery(ralRepository, await ralRepository.getByUid("Start"), "wurzel_type", DiscoveryDimension.ContainerId, [
         DiscoveryDimension.ContainerId,
         DiscoveryDimension.Owner,
         DiscoveryDimension.LinkedObjectRef,

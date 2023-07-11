@@ -53,7 +53,7 @@ describe('RalMethod', () => {
                         "template": {
                             "RALType": "thing",
                             "version": "1",
-                            "objectStateTemplates": "generalObjectState"
+                            "objectStateTemplates": ["generalObjectState"]
                         },
                         "specificProperties": [
                             {
@@ -111,7 +111,7 @@ describe('RalMethod', () => {
                         "template": {
                             "RALType": "thing",
                             "version": "1",
-                            "objectStateTemplates": "generalObjectState"
+                            "objectStateTemplates": ["generalObjectState"]
                         },
                         "specificProperties": [
                             {
@@ -284,7 +284,7 @@ describe('RalMethod', () => {
                         "template": {
                             "RALType": "thing",
                             "version": "1",
-                            "objectStateTemplates": "generalObjectState"
+                            "objectStateTemplates": ["generalObjectState"]
                         },
                         "specificProperties": [
                             {
@@ -342,7 +342,7 @@ describe('RalMethod', () => {
                         "template": {
                             "RALType": "thing",
                             "version": "1",
-                            "objectStateTemplates": "generalObjectState"
+                            "objectStateTemplates": ["generalObjectState"]
                         },
                         "specificProperties": [
                             {

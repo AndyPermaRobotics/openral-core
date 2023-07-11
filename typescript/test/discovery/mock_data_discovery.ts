@@ -1,7 +1,7 @@
 import { MockRalObjectRepository } from "../../src/repository/mock_ral_object_repository";
 import { RalObjectRepository } from "../../src/repository/ral_object_repository";
 
-export class MockDataDiscoveryV2 {
+export class MockDataDiscovery {
   static docsByUid = {
     wurzel: {
       identity: {
@@ -18,7 +18,7 @@ export class MockDataDiscoveryV2 {
       template: {
         RALType: "wurzel_type",
         version: "1",
-        objectStateTemplates: "",
+        objectStateTemplates: [""],
       },
       specificProperties: [],
       currentGeoLocation: {},
@@ -47,7 +47,7 @@ export class MockDataDiscoveryV2 {
       template: {
         RALType: "",
         version: "1",
-        objectStateTemplates: "",
+        objectStateTemplates: [""],
       },
       specificProperties: [],
       currentGeoLocation: {
@@ -80,7 +80,7 @@ export class MockDataDiscoveryV2 {
       template: {
         RALType: "",
         version: "1",
-        objectStateTemplates: "",
+        objectStateTemplates: [""],
       },
       specificProperties: [],
       currentGeoLocation: {
@@ -108,7 +108,7 @@ export class MockDataDiscoveryV2 {
       template: {
         RALType: "",
         version: "1",
-        objectStateTemplates: "",
+        objectStateTemplates: [""],
       },
       specificProperties: [],
       currentGeoLocation: {
@@ -136,7 +136,7 @@ export class MockDataDiscoveryV2 {
       template: {
         RALType: "",
         version: "1",
-        objectStateTemplates: "",
+        objectStateTemplates: [""],
       },
       specificProperties: [],
       currentGeoLocation: {
@@ -164,7 +164,7 @@ export class MockDataDiscoveryV2 {
       template: {
         RALType: "",
         version: "1",
-        objectStateTemplates: "",
+        objectStateTemplates: [""],
       },
       specificProperties: [],
       currentGeoLocation: {
@@ -201,7 +201,7 @@ export class MockDataDiscoveryV2 {
       template: {
         RALType: "",
         version: "1",
-        objectStateTemplatesym: "",
+        objectStateTemplates: [""],
       },
       specificProperties: [],
       currentGeoLocation: {},
@@ -234,7 +234,7 @@ export class MockDataDiscoveryV2 {
       template: {
         RALType: "",
         version: "1",
-        objectStateTemplates: "",
+        objectStateTemplates: [""],
       },
       specificProperties: [],
       currentGeoLocation: {},
@@ -262,8 +262,8 @@ export class MockDataDiscoveryV2 {
 
   static getMockRalRepository(): RalObjectRepository {
     return new MockRalObjectRepository(
-      MockDataDiscoveryV2.docsByUid,
-      MockDataDiscoveryV2.docsByContainerId
+      MockDataDiscovery.docsByUid,
+      MockDataDiscovery.docsByContainerId
     );
   }
 }
