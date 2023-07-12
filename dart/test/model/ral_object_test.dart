@@ -56,12 +56,12 @@ void main() {
                   "streetName": "unknown",
                   "streetNumber": "unknown",
                 },
-                "3WordCode": "unknown",
+                "3WordCode": "3WordCode",
                 "geoCoordinates": {
                   "longitude": 0,
                   "latitude": 0,
                 },
-                "plusCode": "unknown"
+                "plusCode": "plusCode"
               },
               "locationHistoryRef": [],
               "ownerHistoryRef": [],
@@ -102,7 +102,16 @@ void main() {
             );
 
             expect(ralObject.currentGeoLocation.container!.uid, equals("unknown"));
-            //TODO: Other geo location fields
+            expect(ralObject.currentGeoLocation.postalAddress!.country, equals("unknown"));
+            expect(ralObject.currentGeoLocation.postalAddress!.cityName, equals("unknown"));
+            expect(ralObject.currentGeoLocation.postalAddress!.cityNumber, equals("unknown"));
+            expect(ralObject.currentGeoLocation.postalAddress!.streetName, equals("unknown"));
+            expect(ralObject.currentGeoLocation.postalAddress!.streetNumber, equals("unknown"));
+
+            expect(ralObject.currentGeoLocation.threeWordCode, equals("3WordCode"));
+            expect(ralObject.currentGeoLocation.geoCoordinates!.longitude, equals(0));
+            expect(ralObject.currentGeoLocation.geoCoordinates!.latitude, equals(0));
+            expect(ralObject.currentGeoLocation.plusCode, equals("plusCode"));
 
             expect(ralObject.locationHistoryRef, equals([]), reason: "locationHistoryRef should be empty");
             expect(ralObject.ownerHistoryRef, equals([]), reason: "ownerHistoryRef should be empty");
@@ -212,20 +221,10 @@ void main() {
                 "container": {
                   "UID": "uid1",
                 },
-                // uncomment when implemented
-                // "postalAddress": {
-                //   "country": "unknown",
-                //   "cityName": "unknown",
-                //   "cityNumber": "unknown",
-                //   "streetName": "unknown",
-                //   "streetNumber": "unknown",
-                // },
-                // "3WordCode": "unknown",
-                // "geoCoordinates": {
-                //   "longitude": 0,
-                //   "latitude": 0,
-                // },
-                // "plusCode": "unknown"
+                "postalAddress": null,
+                "3WordCode": null,
+                "geoCoordinates": null,
+                "plusCode": null,
               },
               "locationHistoryRef": ["locationHistoryRef1"],
               "ownerHistoryRef": ["ownerHistoryRef1"],
