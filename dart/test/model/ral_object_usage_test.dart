@@ -1,3 +1,4 @@
+import 'package:openral_core/src/model/current_geo_location.dart';
 import 'package:openral_core/src/model/definition.dart';
 import 'package:openral_core/src/model/identity.dart';
 import 'package:openral_core/src/model/object_template.dart';
@@ -38,6 +39,7 @@ void main() {
           version: "",
           objectStateTemplates: [""],
         ),
+        currentGeoLocation: CurrentGeoLocation(),
       );
 
       expect(
@@ -70,6 +72,7 @@ void main() {
           version: "",
           objectStateTemplates: [""],
         ),
+        currentGeoLocation: CurrentGeoLocation(),
       );
 
       expect(

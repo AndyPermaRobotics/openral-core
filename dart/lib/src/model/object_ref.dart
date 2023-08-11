@@ -1,6 +1,6 @@
 class ObjectRef {
-  final String uid;
-  final String? role;
+  String uid;
+  String? role;
 
   ObjectRef({
     required this.uid,

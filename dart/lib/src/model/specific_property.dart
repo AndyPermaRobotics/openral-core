@@ -1,7 +1,7 @@
 class SpecificProperty {
   final String key;
-  final dynamic value;
-  final String? unit;
+  dynamic value;
+  String? unit;
 
   SpecificProperty({
     required this.key,

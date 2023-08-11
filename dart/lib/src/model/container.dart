@@ -1,5 +1,5 @@
 class Container {
-  final String uid;
+  String uid;
 
   Container({required this.uid});
 

@@ -3,9 +3,9 @@ import 'package:openral_core/src/cross/backend/parsing/parsing_error.dart';
 import 'package:openral_core/src/model_parser/method_template_parser.dart';
 
 class MethodTemplate {
-  final String ralType;
-  final String version;
-  final List<String> methodStateTemplates;
+  String ralType;
+  String version;
+  List<String> methodStateTemplates;
 
   MethodTemplate({
     required this.ralType,

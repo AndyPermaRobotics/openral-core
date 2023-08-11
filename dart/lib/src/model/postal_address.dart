@@ -1,9 +1,9 @@
 class PostalAddress {
-  final String streetName;
-  final String streetNumber;
-  final String cityName;
-  final String cityNumber;
-  final String country;
+  String streetName;
+  String streetNumber;
+  String cityName;
+  String cityNumber;
+  String country;
 
   PostalAddress({
     required this.streetName,

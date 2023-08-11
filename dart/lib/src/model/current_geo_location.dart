@@ -3,17 +3,17 @@ import 'package:openral_core/src/model/geo_coordinates.dart';
 import 'package:openral_core/src/model/postal_address.dart';
 
 class CurrentGeoLocation {
-  final Container? container;
+  Container? container;
 
-  final String? threeWordCode;
+  String? threeWordCode;
 
-  final PostalAddress? postalAddress;
+  PostalAddress? postalAddress;
 
-  final GeoCoordinates? geoCoordinates;
+  GeoCoordinates? geoCoordinates;
 
-  final String? plusCode;
+  String? plusCode;
 
-  const CurrentGeoLocation({
+  CurrentGeoLocation({
     this.container,
     this.postalAddress,
     this.threeWordCode,

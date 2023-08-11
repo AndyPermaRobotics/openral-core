@@ -1,8 +1,8 @@
 class GeoCoordinates {
-  final double longitude;
-  final double latitude;
+  double longitude;
+  double latitude;
 
-  const GeoCoordinates({
+  GeoCoordinates({
     this.longitude = 0,
     this.latitude = 0,
   });

@@ -60,29 +60,33 @@ import 'package:openral_core/src/model_parser/ral_object_parser.dart';
 ///   "methodHistoryRef": [],
 ///   "linkedObjectRef": []
 /// }
+///
 ///```
 class RalObject<S extends SpecificProperties> {
-  final Identity identity;
+  //Note: The fields are not final, because otherwise we would have to create a copyWith constructor for every nested field,
+  //which would be a lot of boilerplate code
 
-  final List<ObjectRef> currentOwners;
+  Identity identity;
 
-  final Definition definition;
+  List<ObjectRef> currentOwners;
 
-  final String objectState;
+  Definition definition;
 
-  final ObjectTemplate template;
+  String objectState;
 
-  final S _specificProperties;
+  ObjectTemplate template;
 
-  final CurrentGeoLocation currentGeoLocation;
+  S _specificProperties;
 
-  final List<String> locationHistoryRef;
+  CurrentGeoLocation currentGeoLocation;
 
-  final List<String> ownerHistoryRef;
+  List<String> locationHistoryRef;
 
-  final List<String> methodHistoryRef;
+  List<String> ownerHistoryRef;
 
-  final List<ObjectRef> linkedObjectRef;
+  List<String> methodHistoryRef;
+
+  List<ObjectRef> linkedObjectRef;
 
   RalObject({
     required this.identity,
@@ -91,7 +95,7 @@ class RalObject<S extends SpecificProperties> {
     this.objectState = "undefined",
     required this.template,
     required S specificProperties,
-    this.currentGeoLocation = const CurrentGeoLocation(),
+    required this.currentGeoLocation,
     this.locationHistoryRef = const [],
     this.ownerHistoryRef = const [],
     this.methodHistoryRef = const [],

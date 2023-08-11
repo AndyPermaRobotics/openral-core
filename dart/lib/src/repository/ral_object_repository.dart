@@ -17,4 +17,34 @@ abstract class RalObjectRepository {
 
   /// Creates a new [RalObject] in the database. If [overrideIfExists] is true, the [RalObject] will be overwritten if it already exists. Otherwise, an error will be thrown.
   Future<void> create(RalObject ralObject, {required bool overrideIfExists});
+
+  /// updates the given [RalObject]
+  /// the modification must be done in the [modificationFunc] function, which provides an update to date version of the [RalObject] as a parameter, to avoid overwriting changes
+  Future<void> updateObject({
+    required RalObject ralObject,
+    required RalObject Function(RalObject object) modificationFunc,
+  }) async {
+    await updateByUid(
+      uid: ralObject.identity.uid,
+      modificationFunc: modificationFunc,
+    );
+  }
+
+  /// updates the given RalObject with the given uid
+  /// the modification must be done in the [modificationFunc] function, which provides an update to date version of the [RalObject] as a parameter, to avoid overwriting changes
+  Future<void> updateByUid({
+    required String uid,
+    required RalObject Function(RalObject object) modificationFunc,
+  }) async {
+    //Note: if the specific implementation of [RalObjectRepository] supports transactions, this should be done in a transaction
+
+    final object = await getByUid(uid);
+
+    final modifiedObject = modificationFunc(object);
+
+    await create(
+      modifiedObject,
+      overrideIfExists: true,
+    );
+  }
 }

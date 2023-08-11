@@ -3,11 +3,11 @@ import 'package:openral_core/src/cross/backend/parsing/parsing_error.dart';
 import 'package:openral_core/src/model_parser/identity_parser.dart';
 
 class Identity {
-  final String uid;
-  final String? name;
-  final String? siteTag;
-  final List<String> alternateIDs;
-  final List<String> alternateNames;
+  String uid;
+  String? name;
+  String? siteTag;
+  List<String> alternateIDs;
+  List<String> alternateNames;
 
   Identity({
     required this.uid,

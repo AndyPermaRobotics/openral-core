@@ -3,8 +3,8 @@ import 'package:openral_core/src/cross/backend/parsing/parsing_error.dart';
 import 'package:openral_core/src/model_parser/definition_parser.dart';
 
 class Definition {
-  final String? definitionText;
-  final String? definitionURL;
+  String? definitionText;
+  String? definitionURL;
 
   Definition({
     this.definitionText,
