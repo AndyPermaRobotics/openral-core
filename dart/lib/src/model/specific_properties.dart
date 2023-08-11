@@ -20,6 +20,11 @@ class SpecificProperties {
     return _specificProperties[key];
   }
 
+  ///adds the given [SpecificProperty] to this [SpecificProperties], will override existing properties with the same key
+  void set(SpecificProperty specificProperty) {
+    _specificProperties[specificProperty.key] = specificProperty;
+  }
+
   Map<String, SpecificProperty> get map => Map.fromEntries(_specificProperties.entries);
 
   ///returns [SpecificProperty]s as list of maps
