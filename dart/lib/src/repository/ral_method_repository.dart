@@ -9,22 +9,22 @@ abstract class RalMethodRepository {
   /// Returns all [RalMethod]s with the given ralType. Looks for 'template.RALType' == ralType in the database.
   Future<List<RalMethod>> getByRalType(String ralType);
 
-  /// Creates a new [RalObject] in the database. If [overrideIfExists] is true, the [RalObject] will be overwritten if it already exists. Otherwise, an error will be thrown.
+  /// Creates a new [RalMethod] in the database. If [overrideIfExists] is true, the [RalMethod] will be overwritten if it already exists. Otherwise, an error will be thrown.
   Future<void> create(RalMethod ralMethod, {required bool overrideIfExists});
 
   /// updates the given [RalMethod]
   /// the modification must be done in the [modificationFunc] function, which provides an update to date version of the [RalMethod] as a parameter, to avoid overwriting changes
   Future<void> updateMethod({
-    required RalMethod ralObject,
+    required RalMethod ralMethod,
     required RalMethod Function(RalMethod method) modificationFunc,
   }) async {
     await updateByUid(
-      uid: ralObject.identity.uid,
+      uid: ralMethod.identity.uid,
       modificationFunc: modificationFunc,
     );
   }
 
-  /// updates the given RalObject with the given uid
+  /// updates the given RalMethod with the given uid
   /// the modification must be done in the [modificationFunc] function, which provides an update to date version of the [RalMethod] as a parameter, to avoid overwriting changes
   Future<void> updateByUid({
     required String uid,
