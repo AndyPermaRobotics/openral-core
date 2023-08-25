@@ -12,6 +12,8 @@ abstract class RalMethodRepository {
   /// Creates a new [RalMethod] in the database. If [overrideIfExists] is true, the [RalMethod] will be overwritten if it already exists. Otherwise, an error will be thrown.
   Future<void> create(RalMethod ralMethod, {required bool overrideIfExists});
 
+  Future<void> deleteByUid(String uid);
+
   /// updates the given [RalMethod]
   /// the modification must be done in the [modificationFunc] function, which provides an update to date version of the [RalMethod] as a parameter, to avoid overwriting changes
   Future<void> updateMethod({

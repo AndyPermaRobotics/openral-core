@@ -91,4 +91,9 @@ class MockRalObjectRepository<S extends SpecificProperties> extends RalObjectRep
       }
     }
   }
+
+  @override
+  Future<void> deleteByUid(String uid) async {
+    docsByUid.remove(uid);
+  }
 }
