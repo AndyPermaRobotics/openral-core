@@ -5,6 +5,12 @@ For more informations about openRAL see: https://open-ral.io/
 
 ## Installation
 
+Test-Version
+```bash
+pip install --upgrade -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ openral-py
+```
+
+
 ```bash
 pip install openral-py
 ```

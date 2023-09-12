@@ -127,14 +127,30 @@ class GraphNode:
         """
 
         #!we have to pay attention here, that we don't run into an infinite loop 
-        
-        raise NotImplementedError()
 
-        # descendants = []
-        # for child in self._children:
-        #     descendants.append(child)
-        #     descendants.extend(child.get_descendants())
-        # return descendants
+        descendants = []
+        for child in self.children(dimension):
+            if(child in descendants): #we pay attention here, that we don't run into an infinite loop
+                continue
+
+            descendants.append(child)
+            descendants.extend(child.get_descendants(dimension))
+        return descendants
+    
+    def get_all_descendants(self) -> List['GraphNode']:
+        """
+        Returns all descendants of this node in all DiscoveryDimensions. 
+        Includes all children, grandchildren, etc.
+        """
+
+        descendants = []
+        for child in self.all_children():
+            if(child in descendants): #we pay attention here, that we don't run into an infinite loop
+                continue
+
+            descendants.append(child)
+            descendants.extend(child.get_all_descendants())
+        return descendants
 
 
     def __str__(self) -> str:

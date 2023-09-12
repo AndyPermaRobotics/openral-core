@@ -155,3 +155,6 @@ class RalObject:
             method_history_ref=method_history_ref,
             linked_object_ref=linked_object_ref
         )
+    
+    def __str__(self) -> str:
+        return f"RalObject(UID: {self.identity.uid}, ralType: {self.template.ral_type}, name: {self.identity.name})"
