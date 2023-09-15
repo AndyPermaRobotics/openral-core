@@ -12,7 +12,7 @@ with open('README.md') as f:
 
 setup(
     name='openral_py',
-    version='0.6.12',
+    version='0.6.14',
     description = 'Python package to work with openRAL',
     long_description=readme,
     long_description_content_type='text/markdown',

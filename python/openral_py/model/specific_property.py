@@ -2,7 +2,7 @@ from typing import Any, Dict, Optional
 
 
 class SpecificProperty:
-    def __init__(self, key: str, value: str, unit: Optional[str] = None):
+    def __init__(self, key: str, value: Any, unit: Optional[str] = None):
         self.key = key
         self.value = value
         self.unit = unit
