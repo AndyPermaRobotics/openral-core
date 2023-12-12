@@ -1,19 +1,16 @@
-
-
 from openral_py.model.ral_object import RalObject
 
 
 class TestRalObject:
-    
     def test_from_map(self):
-        #Arrange
+        # Arrange
         data = {
             "identity": {
                 "UID": "uid",
                 "name": "thing",
                 "siteTag": "siteTag",
                 "alternateIDs": [],
-                "alternateNames": []
+                "alternateNames": [],
             },
             "currentOwners": [
                 {
@@ -23,25 +20,19 @@ class TestRalObject:
             ],
             "definition": {
                 "definitionText": "An object or entity that is not or cannot be named specifically",
-                "definitionURL": "https://www.thefreedictionary.com/thing"
+                "definitionURL": "https://www.thefreedictionary.com/thing",
             },
             "objectState": "undefined",
             "template": {
                 "RALType": "thing",
                 "version": "1",
-                "objectStateTemplates": ["generalObjectState"]
+                "objectStateTemplates": ["generalObjectState"],
             },
             "specificProperties": [
-                {
-                "key": "serial number",
-                "value": "my_value",
-                "unit": "String"
-                }
+                {"key": "serial number", "value": "my_value", "unit": "String"}
             ],
             "currentGeolocation": {
-                "container": {
-                "UID": "unknown"
-                },
+                "container": {"UID": "unknown"},
                 # todo
                 # "postalAddress": {
                 # "country": "unknown",
@@ -70,13 +61,13 @@ class TestRalObject:
                     "UID": "linkedObjUid",
                     "role": "linkedObjRole",
                 },
-            ]
+            ],
         }
 
-        #Act
+        # Act
         ral_object = RalObject.from_map(data)
 
-        #Assert
+        # Assert
         assert ral_object.identity.uid == "uid"
         assert ral_object.identity.name == "thing"
         assert ral_object.identity.site_tag == "siteTag"
@@ -86,15 +77,20 @@ class TestRalObject:
         assert len(ral_object.current_owners) == 1, "current_owners has one element"
         assert ral_object.current_owners[0].uid == "123", "current_owners[0].uid is 123"
 
-        assert ral_object.definition.definition_text == "An object or entity that is not or cannot be named specifically"
-        assert ral_object.definition.definition_url == "https://www.thefreedictionary.com/thing"
+        assert (
+            ral_object.definition.definition_text
+            == "An object or entity that is not or cannot be named specifically"
+        )
+        assert (
+            ral_object.definition.definition_url
+            == "https://www.thefreedictionary.com/thing"
+        )
 
         assert ral_object.object_state == "undefined"
 
         assert ral_object.template.ral_type == "thing"
         assert ral_object.template.version == "1"
         assert ral_object.template.object_state_templates == ["generalObjectState"]
-
 
         specific_properties = ral_object.specific_properties.get("serial number")
         if specific_properties is not None:
@@ -118,33 +114,36 @@ class TestRalObject:
         # assert ral_object.current_geolocation.postal_address.street_number == "unknown"
 
         assert ral_object.location_history_ref == []
-        
-        assert len(ral_object.owner_history_ref) == 1, "owner_history_ref has one element"
-        assert ral_object.owner_history_ref[0].uid == "456", "owner_history_ref[0].uid is 456"
+
+        assert (
+            len(ral_object.owner_history_ref) == 1
+        ), "owner_history_ref has one element"
+        assert (
+            ral_object.owner_history_ref[0].uid == "456"
+        ), "owner_history_ref[0].uid is 456"
 
         assert ral_object.method_ristory_ref == []
-        assert len(ral_object.linked_object_ref) == 1, "linked_object_ref has one element"
-        assert ral_object.linked_object_ref[0].uid == "linkedObjUid", "linked_object_ref[0].uid is linkedObjUid"
-    
-    
+        assert (
+            len(ral_object.linked_object_ref) == 1
+        ), "linked_object_ref has one element"
+        assert (
+            ral_object.linked_object_ref[0].uid == "linkedObjUid"
+        ), "linked_object_ref[0].uid is linkedObjUid"
+
     def test_from_map_minimum_data(self):
-        #Arrange
+        # Arrange
         data = {
             "identity": {
                 "UID": "uid",
             },
-            "definition": {
-                
-            },
-            
+            "definition": {},
             "template": {
                 "RALType": "thing",
                 "version": "1",
-                "objectStateTemplates": ["generalObjectState"]
+                "objectStateTemplates": ["generalObjectState"],
             },
             "specificProperties": [],
             "currentGeolocation": {
-                
                 # todo
                 # "postalAddress": {
                 # "country": "unknown",
@@ -162,10 +161,10 @@ class TestRalObject:
             },
         }
 
-        #Act
+        # Act
         ral_object = RalObject.from_map(data)
 
-        #Assert
+        # Assert
         assert ral_object.identity.uid == "uid"
         assert ral_object.identity.name is None
         assert ral_object.identity.site_tag is None
@@ -177,14 +176,17 @@ class TestRalObject:
         assert ral_object.definition.definition_text is None
         assert ral_object.definition.definition_url is None
 
-        assert ral_object.object_state == "undefined", "object_state default value is undefined"
+        assert (
+            ral_object.object_state == "undefined"
+        ), "object_state default value is undefined"
 
         assert ral_object.template.ral_type == "thing"
         assert ral_object.template.version == "1"
         assert ral_object.template.object_state_templates == ["generalObjectState"]
 
-
-        assert len(ral_object.specific_properties.map) == 0, "specific_properties is empty"
+        assert (
+            len(ral_object.specific_properties.map) == 0
+        ), "specific_properties is empty"
 
         container = ral_object.current_geo_location.container
         assert container is None, "container is None"
@@ -200,4 +202,40 @@ class TestRalObject:
         assert ral_object.owner_history_ref == [], "ownerHistoryRef is empty list"
         assert ral_object.method_ristory_ref == [], "methodHistoryRef is empty list"
         assert ral_object.linked_object_ref == [], "linkedObjectRef is empty list"
-    
+
+    def test_index_operator(self):
+        # Arrange
+        data = {
+            "identity": {
+                "UID": "uid",
+            },
+            "definition": {},
+            "template": {
+                "RALType": "thing",
+                "version": "1",
+                "objectStateTemplates": ["generalObjectState"],
+            },
+            "specificProperties": [],
+            "currentGeolocation": {
+                # todo
+                # "postalAddress": {
+                # "country": "unknown",
+                # "cityName": "unknown",
+                # "cityNumber": "unknown",
+                # "streetName": "unknown",
+                # "streetNumber": "unknown"
+                # },
+                # "3WordCode": "unknown",
+                # "geoCoordinates": {
+                # "longitude": 0,
+                # "latitude": 0
+                # },
+                # "plusCode": "unknown"
+            },
+        }
+
+        # Act
+        ral_object = RalObject.from_map(data)
+
+        # Assert
+        assert ral_object["identity"]["UID"] == "uid"

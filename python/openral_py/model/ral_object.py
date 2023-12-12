@@ -1,4 +1,3 @@
-
 from typing import Callable
 
 from openral_py.model.current_geo_location import CurrentGeoLocation
@@ -11,75 +10,76 @@ from openral_py.model.template import Template
 
 class RalObject:
     """
-    represents the base class for RAL objects
-    Represents a json object like this:
-    ```json
-    {
-        "identity": {
-            "UID": "",
-            "name": "thing",
-            "siteTag": "",
-            "alternateIDs": [],
-            "alternateNames": []
-        },
-        "currentOwners": [],
-        "definition": {
-            "definitionText": "An object or entity that is not or cannot be named specifically",
-            "definitionURL": "https://www.thefreedictionary.com/thing"
-        },
-        "objectState": "undefined",
-        "template": {
-            "RALType": "thing",
-            "version": "1",
-            "objectStateTemplates": ["generalObjectState"]
-        },
-        "specificProperties": [
-            {
-            "key": "serial number",
-            "value": "",
-            "unit": "String"
-            }
-        ],
-        "currentGeolocation": {
-            "container": {
-            "UID": "unknown"
+        represents the base class for RAL objects
+        Represents a json object like this:
+        ```json
+        {
+            "identity": {
+                "UID": "",
+                "name": "thing",
+                "siteTag": "",
+                "alternateIDs": [],
+                "alternateNames": []
             },
-            "postalAddress": {
-            "country": "unknown",
-            "cityName": "unknown",
-            "cityNumber": "unknown",
-            "streetName": "unknown",
-            "streetNumber": "unknown"
+            "currentOwners": [],
+            "definition": {
+                "definitionText": "An object or entity that is not or cannot be named specifically",
+                "definitionURL": "https://www.thefreedictionary.com/thing"
             },
-            "3WordCode": "unknown",
-            "geoCoordinates": {
-            "longitude": 0,
-            "latitude": 0
+            "objectState": "undefined",
+            "template": {
+                "RALType": "thing",
+                "version": "1",
+                "objectStateTemplates": ["generalObjectState"]
             },
-            "plusCode": "unknown"
-        },
-        "locationHistoryRef": [],
-        "ownerHistoryRef": [],
-        "methodHistoryRef": [],
-        "linkedObjectRef": []
-    }
-```
-    
+            "specificProperties": [
+                {
+                "key": "serial number",
+                "value": "",
+                "unit": "String"
+                }
+            ],
+            "currentGeolocation": {
+                "container": {
+                "UID": "unknown"
+                },
+                "postalAddress": {
+                "country": "unknown",
+                "cityName": "unknown",
+                "cityNumber": "unknown",
+                "streetName": "unknown",
+                "streetNumber": "unknown"
+                },
+                "3WordCode": "unknown",
+                "geoCoordinates": {
+                "longitude": 0,
+                "latitude": 0
+                },
+                "plusCode": "unknown"
+            },
+            "locationHistoryRef": [],
+            "ownerHistoryRef": [],
+            "methodHistoryRef": [],
+            "linkedObjectRef": []
+        }
+    ```
+
     """
+
     def __init__(
-            self, 
-            identity: Identity, 
-            definition: Definition,  
-            template: Template, 
-            specific_properties: SpecificProperties, 
-            current_geo_location: CurrentGeoLocation = CurrentGeoLocation(), 
-            current_owners: list[ObjectRef] = [], 
-            object_state: str = "undefined", 
-            location_history_ref: list[str] = [], 
-            owner_history_ref: list[ObjectRef] = [], 
-            method_history_ref: list[str] = [], 
-            linked_object_ref: list[ObjectRef] = []
-        ):
+        self,
+        identity: Identity,
+        definition: Definition,
+        template: Template,
+        specific_properties: SpecificProperties,
+        current_geo_location: CurrentGeoLocation = CurrentGeoLocation(),
+        current_owners: list[ObjectRef] = [],
+        object_state: str = "undefined",
+        location_history_ref: list[str] = [],
+        owner_history_ref: list[ObjectRef] = [],
+        method_history_ref: list[str] = [],
+        linked_object_ref: list[ObjectRef] = [],
+    ):
         self.identity = identity
         self.current_owners = current_owners
         self.definition = definition
@@ -91,12 +91,12 @@ class RalObject:
         self.owner_history_ref = owner_history_ref
         self.method_ristory_ref = method_history_ref
         self.linked_object_ref = linked_object_ref
-    
+
     @property
     def specific_properties(self):
         return self._specificProperties
 
-    def transformTo(self, specificPropertiesTransform: Callable) -> 'RalObject':
+    def transformTo(self, specificPropertiesTransform: Callable) -> "RalObject":
         return RalObject(
             identity=self.identity,
             current_owners=self.current_owners,
@@ -108,13 +108,13 @@ class RalObject:
             location_history_ref=self.location_history_ref,
             owner_history_ref=self.owner_history_ref,
             method_history_ref=self.method_ristory_ref,
-            linked_object_ref=self.linked_object_ref
+            linked_object_ref=self.linked_object_ref,
         )
 
     def to_map(self) -> dict:
         return {
             "identity": self.identity.to_map(),
-            "currentOwners": [value.to_map() for value in self.current_owners], 
+            "currentOwners": [value.to_map() for value in self.current_owners],
             "definition": self.definition.to_map(),
             "objectState": self.object_state,
             "template": self.template.to_map(),
@@ -125,22 +125,31 @@ class RalObject:
             "methodHistoryRef": self.method_ristory_ref,
             "linkedObjectRef": [value.to_map() for value in self.linked_object_ref],
         }
-    
+
     @staticmethod
-    def from_map(map: dict) -> 'RalObject':
-    
+    def from_map(map: dict) -> "RalObject":
         identity = Identity.from_map(map.get("identity", {}))
 
-        current_owners = [ObjectRef.from_map(value) for value in map.get("currentOwners", [])]    
+        current_owners = [
+            ObjectRef.from_map(value) for value in map.get("currentOwners", [])
+        ]
         definition = Definition.from_map(map.get("definition", {}))
         object_state = map.get("objectState", "undefined")
         template = Template.from_map(map.get("template", {}))
-        specific_properties = SpecificProperties.from_maps(map.get("specificProperties", []))
-        current_geo_location = CurrentGeoLocation.from_map(map.get("currentGeolocation", {}))
+        specific_properties = SpecificProperties.from_maps(
+            map.get("specificProperties", [])
+        )
+        current_geo_location = CurrentGeoLocation.from_map(
+            map.get("currentGeolocation", {})
+        )
         location_history_ref = map.get("locationHistoryRef", [])
-        owner_history_ref = [ObjectRef.from_map(value) for value in map.get("ownerHistoryRef", [])]
+        owner_history_ref = [
+            ObjectRef.from_map(value) for value in map.get("ownerHistoryRef", [])
+        ]
         method_history_ref = map.get("methodHistoryRef", [])
-        linked_object_ref = [ObjectRef.from_map(value) for value in map.get("linkedObjectRef", [])]
+        linked_object_ref = [
+            ObjectRef.from_map(value) for value in map.get("linkedObjectRef", [])
+        ]
 
         return RalObject(
             identity=identity,
@@ -153,8 +162,12 @@ class RalObject:
             location_history_ref=location_history_ref,
             owner_history_ref=owner_history_ref,
             method_history_ref=method_history_ref,
-            linked_object_ref=linked_object_ref
+            linked_object_ref=linked_object_ref,
         )
-    
+
+    def __getitem__(self, key):
+        """Support the [] operator to access specific properties"""
+        return self.to_map()[key]
+
     def __str__(self) -> str:
         return f"RalObject(UID: {self.identity.uid}, ralType: {self.template.ral_type}, name: {self.identity.name})"
